@@ -10,6 +10,7 @@ specifiers:
   tailwindcss: ^2.2.19
   tailwindcss-debug-screens: ^2.2.0
   typescript: ^4.4.3
+  vee-validate: ^4.5.5
   vite: ^2.6.4
   vite-plugin-pwa: ^0.11.3
   vue: ^3.2.16
@@ -18,6 +19,7 @@ specifiers:
 
 dependencies:
   '@tailwindcss/forms': 0.3.4_tailwindcss@2.2.19
+  vee-validate: 4.5.5_vue@3.2.21
   vue: 3.2.21
 
 devDependencies:
@@ -1412,6 +1414,10 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.2.21
       '@vue/shared': 3.2.21
+    dev: false
+
+  /@vue/devtools-api/6.0.0-beta.20.1:
+    resolution: {integrity: sha512-R2rfiRY+kZugzWh9ZyITaovx+jpU4vgivAEAiz80kvh3yviiTU3CBuGuyWpSwGz9/C7TkSWVM/FtQRGlZ16n8Q==}
     dev: false
 
   /@vue/reactivity/3.2.21:
@@ -3588,6 +3594,15 @@ packages:
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
     dev: true
+
+  /vee-validate/4.5.5_vue@3.2.21:
+    resolution: {integrity: sha512-AAucVxUVC6n1QCGux61ExCbHFQglDDSUxbzGd1nGKQpXJK6F8ncGOStQOaZF+3TnNeuMoW5aQdK4MAz15YpaVA==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      '@vue/devtools-api': 6.0.0-beta.20.1
+      vue: 3.2.21
+    dev: false
 
   /vite-plugin-pwa/0.11.3_vite@2.6.14:
     resolution: {integrity: sha512-KAuv7aAX1VTkaR7DakpmUG7LypNXlf+M/x4y2xYrYgQHoqk2Y2mKKR0dAG5cGBekqcev56QsABusTBScPm50mw==}

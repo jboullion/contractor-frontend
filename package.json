@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.3.4",
+    "vee-validate": "^4.5.5",
     "vue": "^3.2.16"
   },
   "devDependencies": {
