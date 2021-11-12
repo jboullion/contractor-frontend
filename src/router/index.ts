@@ -45,14 +45,12 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(_to, _from, _savedPosition) {
-    // always scroll to top
-    return { top: 0 };
-    //if (savedPosition) {
-    // return savedPosition;
-    // } else {
-    //   return { left: 0, top: 0 };
-    // }
+  scrollBehavior(_to, _from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { left: 0, top: 0 };
+    }
   },
 });
 
