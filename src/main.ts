@@ -1,19 +1,24 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import './index.css'
-import { registerSW } from 'virtual:pwa-register'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
 
-createApp(App).mount('#app')
+import './index.css';
+import { registerSW } from 'virtual:pwa-register';
 
-const intervalMS = 60 * 60 * 1000
+const app = createApp(App);
+
+app.use(router).mount('#app');
+
+const intervalMS = 60 * 60 * 1000;
 
 const updateSW = registerSW({
   onRegistered(r) {
-    r && setInterval(() => {
-      r.update()
-    }, intervalMS)
+    r &&
+      setInterval(() => {
+        r.update();
+      }, intervalMS);
   },
   onNeedRefresh() {},
-  onOfflineReady() { },
+  onOfflineReady() {},
   //onRegisterError(error) {}
-})
+});

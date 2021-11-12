@@ -14,6 +14,7 @@ specifiers:
   vite: ^2.6.4
   vite-plugin-pwa: ^0.11.3
   vue: ^3.2.16
+  vue-router: '4'
   vue-tsc: ^0.3.0
   workbox-window: ^6.3.0
 
@@ -21,6 +22,7 @@ dependencies:
   '@tailwindcss/forms': 0.3.4_tailwindcss@2.2.19
   vee-validate: 4.5.5_vue@3.2.21
   vue: 3.2.21
+  vue-router: 4.0.12_vue@3.2.21
 
 devDependencies:
   '@vitejs/plugin-vue': 1.9.4_vite@2.6.14
@@ -3785,6 +3787,15 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /vue-router/4.0.12_vue@3.2.21:
+    resolution: {integrity: sha512-CPXvfqe+mZLB1kBWssssTiWg4EQERyqJZes7USiqfW9B5N2x+nHlnsM1D3b5CaJ6qgCvMmYJnz+G0iWjNCvXrg==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      '@vue/devtools-api': 6.0.0-beta.20.1
+      vue: 3.2.21
+    dev: false
 
   /vue-tsc/0.3.0_typescript@4.4.4:
     resolution: {integrity: sha512-zaDRZBxwRIz1XjhNP92FqugG71st6BUMnA2EwPeXrAyzbEYVRz6TezNFceYl3QYqqN8CtaxbqUhaQEDj/ntoCA==}
