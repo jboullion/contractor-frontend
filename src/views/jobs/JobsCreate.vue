@@ -24,11 +24,21 @@
                   :type="'text'"
                   :error="form.errors.jobName"
                   maxlength="100"
+                  required
+                />
+
+                <StringInput
+                  :name="'description'"
+                  :label="'Description'"
+                  v-model="form.description"
+                  :type="'text'"
+                  :error="form.errors.description"
+                  maxlength="255"
                 />
 
                 <StringInput
                   :name="'first-name'"
-                  :label="'First Name'"
+                  :label="'Contact First Name'"
                   v-model="form.firstName"
                   :type="'text'"
                   :error="form.errors.firstName"
@@ -38,7 +48,7 @@
 
                 <StringInput
                   :name="'last-name'"
-                  :label="'Last Name'"
+                  :label="'Contact Last Name'"
                   v-model="form.lastName"
                   :type="'text'"
                   :error="form.errors.lastName"
@@ -48,7 +58,7 @@
 
                 <StringInput
                   :name="'email'"
-                  :label="'First Name'"
+                  :label="'Email'"
                   v-model="form.email"
                   :type="'email'"
                   :error="form.errors.email"
@@ -76,96 +86,42 @@
                   maxlength="100"
                 />
 
-                <!-- 
-                <div
-                  class="
-                    sm:grid
-                    sm:grid-cols-3
-                    sm:gap-4
-                    sm:items-start
-                    sm:border-t
-                    sm:border-gray-200
-                    sm:pt-5
-                  "
-                >
-                  <label
-                    for="region"
-                    class="
-                      block
-                      text-sm
-                      font-medium
-                      text-gray-700
-                      sm:mt-px sm:pt-2
-                    "
-                  >
-                    State / Province
-                  </label>
-                  <div class="mt-1 sm:mt-0 sm:col-span-2">
-                    <input
-                      type="text"
-                      name="region"
-                      id="region"
-                      autocomplete="address-level1"
-                      class="
-                        max-w-lg
-                        block
-                        w-full
-                        shadow-sm
-                        focus:ring-indigo-500 focus:border-indigo-500
-                        sm:max-w-xs sm:text-sm
-                        border-gray-300
-                        rounded-md
-                      "
-                    />
-                  </div>
-                </div>
+                <StringInput
+                  :name="'state'"
+                  :label="'State'"
+                  v-model="form.state"
+                  :type="'text'"
+                  :error="form.errors.state"
+                  autocomplete="address-level1"
+                  maxlength="100"
+                />
 
-                <div
-                  class="
-                    sm:grid
-                    sm:grid-cols-3
-                    sm:gap-4
-                    sm:items-start
-                    sm:border-t
-                    sm:border-gray-200
-                    sm:pt-5
-                  "
-                >
-                  <label
-                    for="postal-code"
-                    class="
-                      block
-                      text-sm
-                      font-medium
-                      text-gray-700
-                      sm:mt-px sm:pt-2
-                    "
-                  >
-                    ZIP / Postal code
-                  </label>
-                  <div class="mt-1 sm:mt-0 sm:col-span-2">
-                    <input
-                      type="text"
-                      name="postal-code"
-                      id="postal-code"
-                      autocomplete="postal-code"
-                      class="
-                        max-w-lg
-                        block
-                        w-full
-                        shadow-sm
-                        focus:ring-indigo-500 focus:border-indigo-500
-                        sm:max-w-xs sm:text-sm
-                        border-gray-300
-                        rounded-md
-                      "
-                    />
-                  </div>
-                </div> -->
+                <StringInput
+                  :name="'zip'"
+                  :label="'ZIP / Postal code'"
+                  v-model="form.zip"
+                  :type="'text'"
+                  :error="form.errors.zip"
+                  autocomplete="postal-code"
+                  maxlength="100"
+                />
+
+                <DropdownSelect
+                  :name="'country'"
+                  :label="'Country'"
+                  v-model="form.country"
+                  :options="[
+                    { label: 'United States', value: 'us' },
+                    { label: 'Canada', value: 'ca' },
+                    { label: 'Mexico', value: 'mex' },
+                  ]"
+                  :error="form.errors.country"
+                  autocomplete="country-name"
+                />
               </div>
             </div>
 
-            <div
+            <!-- <div
               class="
                 divide-y divide-gray-200
                 pt-8
@@ -405,7 +361,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div class="pt-5">
@@ -465,26 +421,46 @@
 
 <script setup lang="ts">
 import StringInput from '@/components/ui/StringInput.vue';
-import { reactive } from 'vue';
+import { AxiosError } from 'axios';
+import { inject, reactive, ref } from 'vue';
+import JobService from '../../services/JobsService';
+import { IJob, IJobCreate } from '../../types/Job';
+import DropdownSelect from '../../components/ui/DropdownSelect.vue';
+
+const _jobsService: JobService = inject('jobsService') as JobService;
+
+const TEST_TOKEN =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impib3VsbGlvbiIsImlhdCI6MTYzNjg0MjQ0OCwiZXhwIjoxNjM2ODQ2MDQ4fQ.O1ht01mvTJtOCUuumfJ5Ynik3rhlSHwKtU-zKGspi6I';
+
+const job = ref<IJob>();
+const loading = ref(false);
 
 const form = reactive({
   jobName: '',
+  description: '',
   firstName: '',
   lastName: '',
   email: '',
   address: '',
   city: '',
+  state: '',
+  zip: '',
+  country: 'us',
   errors: {
     jobName: '',
+    description: '',
     firstName: '',
     lastName: '',
     email: '',
     address: '',
     city: '',
+    state: '',
+    zip: '',
+    country: '',
   },
 });
 
-function onSubmit() {
+async function onSubmit() {
   if (!form.jobName) {
     form.errors.jobName = 'Job Name is Required';
   }
@@ -504,6 +480,26 @@ function onSubmit() {
   // if (!form.city) {
   //   form.errors.city = 'City is required';
   // }
+
+  try {
+    loading.value = true;
+
+    const jobCreate: IJobCreate = {
+      title: form.jobName,
+      description: 'My first job from the front end',
+    };
+
+    job.value = await _jobsService.createJob(TEST_TOKEN, jobCreate);
+  } catch (error: AxiosError | any) {
+    if (error.response) {
+      // Access to config, request, and response
+      console.log(error.response);
+    } else {
+      console.log(error);
+    }
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 

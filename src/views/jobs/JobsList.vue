@@ -137,7 +137,7 @@ const TEST_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impib3VsbGlvbiIsImlhdCI6MTYzNjgzNjczMCwiZXhwIjoxNjM2ODQwMzMwfQ._Iz3WFIF2yWIqsEPOkoFgB42YPhnKpPU8vh3kZl0j24';
 
 const jobs = ref<IJob[]>([]);
-let loading = ref(true);
+const loading = ref(true);
 
 onMounted(async () => {
   try {

@@ -15,14 +15,12 @@
     </label>
     <div class="sm:col-span-2">
       <div class="mt-1 sm:mt-0 relative">
-        <input
-          :type="type"
+        <select
           :name="name"
           :id="name"
           :value="modelValue"
-          @input="$emit('update:modelValue', ($event.target as HTMLFormElement).value)"
+          @change="$emit('update:modelValue', ($event.target as HTMLFormElement).value)"
           v-bind="$attrs"
-          :placeholder="required ? 'Required' : ''"
           class="
             max-w-lg
             block
@@ -36,7 +34,15 @@
             'border-red-300 focus:ring-red-500 focus:border-red-500': error,
             'focus:ring-indigo-500 focus:border-indigo-500': !error,
           }"
-        />
+        >
+          <option
+            v-for="(option, index) in options"
+            :key="option.value"
+            :value="option.value"
+          >
+            {{ option.label }}
+          </option>
+        </select>
         <div
           class="
             absolute
@@ -62,14 +68,11 @@
 
 <script setup lang="ts">
 import { ExclamationCircleIcon } from '@heroicons/vue/solid';
+import { PropType } from 'vue';
+import { DropdownOption } from '../../types/UI';
 
 const props = defineProps({
   name: {
-    type: String,
-    required: true,
-  },
-  type: {
-    // type is included as a prop to require we pass it in
     type: String,
     required: true,
   },
@@ -80,6 +83,10 @@ const props = defineProps({
   modelValue: {
     type: String,
     default: '',
+  },
+  options: {
+    type: Array as PropType<DropdownOption[]>,
+    required: true,
   },
   required: {
     type: Boolean,

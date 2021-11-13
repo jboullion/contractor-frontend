@@ -23,3 +23,8 @@ export interface IJobResponse {
   message?: string;
   error?: string;
 }
+
+export interface IJobCreate {
+  title: string;
+  description?: string;
+}
