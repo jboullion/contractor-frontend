@@ -113,7 +113,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import {
   CalendarIcon,
   ChartBarIcon,
-  FolderIcon,
+  ClipboardIcon,
   HomeIcon,
   InboxIcon,
   UsersIcon,
@@ -123,7 +123,7 @@ const navigation = [
   { name: 'Dashboard', icon: HomeIcon, to: '/', current: true },
   {
     name: 'Jobs',
-    icon: FolderIcon,
+    icon: ClipboardIcon,
     current: false,
     children: [
       { name: 'List', to: '/jobs' },

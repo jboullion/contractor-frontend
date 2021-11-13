@@ -10,8 +10,9 @@
     "@headlessui/vue": "^1.4.2",
     "@heroicons/vue": "^1.0.5",
     "@tailwindcss/forms": "^0.3.4",
-    "vee-validate": "^4.5.5",
+    "axios": "^0.24.0",
     "vue": "^3.2.16",
+    "vue-axios": "^3.4.0",
     "vue-router": "4"
   },
   "devDependencies": {

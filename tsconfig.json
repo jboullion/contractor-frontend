@@ -10,8 +10,10 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["vite-plugin-pwa/client"]
+    "types": ["vite-plugin-pwa/client"],
+    "experimentalDecorators": true
   },
+  "exclude": ["dist"],
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",

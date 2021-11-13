@@ -4,7 +4,9 @@
     <div class="flex flex-col">
       <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div v-if="loading">Loading...</div>
           <div
+            v-else-if="jobs.length"
             class="
               shadow
               overflow-hidden
@@ -77,7 +79,7 @@
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
-                <tr v-for="person in people" :key="person.email">
+                <tr v-for="job in jobs" :key="job.title">
                   <td
                     class="
                       px-6
@@ -88,17 +90,17 @@
                       text-gray-900
                     "
                   >
-                    {{ person.name }}
+                    {{ job.title }}
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{ person.title }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{ person.email }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{ person.role }}
-                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                  ></td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                  ></td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                  ></td>
                   <td
                     class="
                       px-6
@@ -116,28 +118,39 @@
               </tbody>
             </table>
           </div>
+          <div v-else>No Jobs Found!</div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-const people = [
-  {
-    name: 'Jane Cooper',
-    title: 'Regional Paradigm Technician',
-    role: 'Admin',
-    email: 'jane.cooper@example.com',
-  },
-  // More people...
-];
+<script setup lang="ts">
+import { AxiosError } from 'axios';
+import { inject, onMounted, ref } from 'vue';
+import JobService from '../../services/JobsService';
+import { IJob } from '../../types/Job';
 
-export default {
-  setup() {
-    return {
-      people,
-    };
-  },
-};
+const _jobsService: JobService = inject('jobsService') as JobService;
+
+const TEST_TOKEN =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impib3VsbGlvbiIsImlhdCI6MTYzNjgzNjczMCwiZXhwIjoxNjM2ODQwMzMwfQ._Iz3WFIF2yWIqsEPOkoFgB42YPhnKpPU8vh3kZl0j24';
+
+const jobs = ref<IJob[]>([]);
+let loading = ref(true);
+
+onMounted(async () => {
+  try {
+    jobs.value = await _jobsService.getMyJobs(TEST_TOKEN);
+  } catch (error: AxiosError | any) {
+    if (error.response) {
+      // Access to config, request, and response
+      console.log(error.response);
+    } else {
+      console.log(error);
+    }
+  } finally {
+    loading.value = false;
+  }
+});
 </script>

@@ -6,16 +6,17 @@ specifiers:
   '@tailwindcss/forms': ^0.3.4
   '@vitejs/plugin-vue': ^1.9.3
   autoprefixer: ^10.4.0
+  axios: ^0.24.0
   eslint: ^8.2.0
   eslint-plugin-vue: ^8.0.3
   postcss: ^8.3.11
   tailwindcss: ^2.2.19
   tailwindcss-debug-screens: ^2.2.0
   typescript: ^4.4.3
-  vee-validate: ^4.5.5
   vite: ^2.6.4
   vite-plugin-pwa: ^0.11.3
   vue: ^3.2.16
+  vue-axios: ^3.4.0
   vue-router: '4'
   vue-tsc: ^0.3.0
   workbox-window: ^6.3.0
@@ -24,8 +25,9 @@ dependencies:
   '@headlessui/vue': 1.4.2_vue@3.2.21
   '@heroicons/vue': 1.0.5_vue@3.2.21
   '@tailwindcss/forms': 0.3.4_tailwindcss@2.2.19
-  vee-validate: 4.5.5_vue@3.2.21
+  axios: 0.24.0
   vue: 3.2.21
+  vue-axios: 3.4.0_axios@0.24.0+vue@3.2.21
   vue-router: 4.0.12_vue@3.2.21
 
 devDependencies:
@@ -1606,6 +1608,14 @@ packages:
       postcss-value-parser: 4.1.0
     dev: true
 
+  /axios/0.24.0:
+    resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
+    dependencies:
+      follow-redirects: 1.14.5
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /babel-plugin-dynamic-import-node/2.3.3:
     resolution: {integrity: sha512-jZVI+s9Zg3IqA/kdi0i6UDCybUI3aSBLnglhYbSSjKlV7yF1F/5LWv8MakQmvYpnbJDS6fcBL2KzHSxNCMtWSQ==}
     dependencies:
@@ -2360,6 +2370,16 @@ packages:
   /flatted/3.2.4:
     resolution: {integrity: sha512-8/sOawo8tJ4QOBX8YlQBMxL8+RLZfxMQOif9o0KUKTNTjMYElWPE0r/m5VNFxTRd0NSw8qSy8dajrwX4RYI1Hw==}
     dev: true
+
+  /follow-redirects/1.14.5:
+    resolution: {integrity: sha512-wtphSXy7d4/OR+MvIFbCVBDzZ5520qV8XfPklSN5QtxuMUJZ+b0Wnst1e1lCDocfzuCkHqj8k0FpZqO+UIaKNA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
 
   /fraction.js/4.1.1:
     resolution: {integrity: sha512-MHOhvvxHTfRFpF1geTK9czMIZ6xclsEor2wkIGYYq+PxcQqT7vStJqjhe6S1TenZrMZzo+wlqOufBDVepUEgPg==}
@@ -3618,15 +3638,6 @@ packages:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
     dev: true
 
-  /vee-validate/4.5.5_vue@3.2.21:
-    resolution: {integrity: sha512-AAucVxUVC6n1QCGux61ExCbHFQglDDSUxbzGd1nGKQpXJK6F8ncGOStQOaZF+3TnNeuMoW5aQdK4MAz15YpaVA==}
-    peerDependencies:
-      vue: ^3.0.0
-    dependencies:
-      '@vue/devtools-api': 6.0.0-beta.20.1
-      vue: 3.2.21
-    dev: false
-
   /vite-plugin-pwa/0.11.3_vite@2.6.14:
     resolution: {integrity: sha512-KAuv7aAX1VTkaR7DakpmUG7LypNXlf+M/x4y2xYrYgQHoqk2Y2mKKR0dAG5cGBekqcev56QsABusTBScPm50mw==}
     peerDependencies:
@@ -3790,6 +3801,16 @@ packages:
       vscode-pug-languageservice: 0.27.24
       vscode-typescript-languageservice: 0.27.25
     dev: true
+
+  /vue-axios/3.4.0_axios@0.24.0+vue@3.2.21:
+    resolution: {integrity: sha512-S3YTCJeEndzmtaYzyz919Z54wY1D2OftWEhioGbHED3VUSta8ti0OHjDipTPkb1StxOzQLAAO2hSUq830i14KA==}
+    peerDependencies:
+      axios: '>= 0.20.0'
+      vue: ^3.0.0 || ^2.0.0
+    dependencies:
+      axios: 0.24.0
+      vue: 3.2.21
+    dev: false
 
   /vue-eslint-parser/8.0.1_eslint@8.2.0:
     resolution: {integrity: sha512-lhWjDXJhe3UZw2uu3ztX51SJAPGPey1Tff2RK3TyZURwbuI4vximQLzz4nQfCv8CZq4xx7uIiogHMMoSJPr33A==}
