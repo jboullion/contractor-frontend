@@ -316,9 +316,10 @@
 import { ExclamationCircleIcon } from '@heroicons/vue/solid';
 import AuthService from '../../services/AuthService';
 import { AxiosError } from 'axios';
-import { inject, reactive, ref } from 'vue';
+import { inject, onMounted, reactive, ref } from 'vue';
 import { IAuthCredentials, ISignInResponse } from '../../types/Auth';
 import AuthError from './AuthError.vue';
+import Bugsnag from '@bugsnag/js';
 
 const _authService: AuthService = inject('authService') as AuthService;
 
@@ -368,6 +369,8 @@ async function onSubmit() {
       if (error.response.data?.message?.length) {
         errors.value = error.response.data.message;
       }
+    } else {
+      Bugsnag.notify(new Error(error));
     }
   } finally {
     loading.value = false;

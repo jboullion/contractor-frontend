@@ -7,6 +7,8 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@bugsnag/js": "^7.13.3",
+    "@bugsnag/plugin-vue": "^7.13.2",
     "@headlessui/vue": "^1.4.2",
     "@heroicons/vue": "^1.0.5",
     "@tailwindcss/forms": "^0.3.4",

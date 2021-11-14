@@ -239,12 +239,14 @@ import AuthService from '../../services/AuthService';
 import { AxiosError } from 'axios';
 import { inject, reactive, ref } from 'vue';
 import { IAuthCredentials, ISignInResponse, User } from '../../types/Auth';
+import Bugsnag from '@bugsnag/js';
 
 const _authService: AuthService = inject('authService') as AuthService;
 
 const loading = ref(false);
 const formValid = ref(true);
-const responseError = ref('');
+const errorHeading = ref('');
+const errors = ref<String[]>([]);
 
 const form = reactive({
   email: '',
@@ -283,17 +285,13 @@ async function onSubmit() {
       // TODO: auth
     }
   } catch (error: AxiosError | any) {
+    errorHeading.value = 'Unable to login';
     if (error.response) {
-      // Access to config, request, and response
-      console.log(error.response);
       if (error.response.data?.message?.length) {
-        responseError.value = error.response.data.message[0];
-      } else {
-        responseError.value = 'Unable to login';
+        errors.value = error.response.data.message;
       }
     } else {
-      console.log(error);
-      responseError.value = 'Unable to login';
+      Bugsnag.notify(new Error(error));
     }
   } finally {
     loading.value = false;
