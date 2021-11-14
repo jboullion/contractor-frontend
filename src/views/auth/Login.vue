@@ -369,7 +369,7 @@ async function onSubmit() {
 
     if (res.accessToken) {
       $store.commit('setJWT', res.accessToken);
-      $store.commit('authenticated', true);
+      localStorage.setItem('accessToken', res.accessToken);
       $router.push({ path: '/dashboard' });
     } else {
       //Bugsnag.notify(new Error('No access token returned'));

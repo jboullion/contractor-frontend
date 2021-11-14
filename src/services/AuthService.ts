@@ -1,4 +1,5 @@
 import { IAuthCredentials, ISignInResponse, User } from '../types/Auth';
+import store from '../store';
 
 const BASE_URL = '/auth';
 
@@ -10,11 +11,13 @@ export interface IAuthService {
 
   /**
    * Create an account
-   *
-   * TODO: Do we want to return a User here? Or just redirect them to the login page?
-   * TODO: If successful do we want to just return a JWT here?
    */
   signup(credentials: IAuthCredentials): Promise<User>;
+
+  /**
+   * Log a user out
+   */
+  //signout(): Promise<void>;
 }
 
 export default class AuthService implements IAuthService {
@@ -39,4 +42,9 @@ export default class AuthService implements IAuthService {
     });
     return res.data;
   }
+
+  // async signout(): Promise<void> {
+  //   localStorage.removeItem('accessToken');
+  //   store.commit('setJWT', '');
+  // }
 }
