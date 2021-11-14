@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router';
+import store from '../store';
 
 // Lazy Load pages
 const Home = () => import('../views/layouts/Home.vue');
@@ -97,13 +98,11 @@ const router = createRouter({
   },
 });
 
-// TODO: Update to pull from Vuex Store when that is setup
-const isAuthenticated = false;
-
 // https://next.router.vuejs.org/guide/advanced/navigation-guards.html
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && !isAuthenticated) next('/login');
-  else if (to.meta.redirectAuth && isAuthenticated) next('/dashboard');
+  if (to.meta.requiresAuth && !store.getters.isAuthenticated) next('/login');
+  else if (to.meta.redirectAuth && store.getters.isAuthenticated)
+    next('/dashboard');
   else next();
 });
 

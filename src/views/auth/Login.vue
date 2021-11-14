@@ -321,14 +321,13 @@ import { IAuthCredentials, ISignInResponse } from '../../types/Auth';
 import AuthError from '../../components/AuthError.vue';
 
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 //import Bugsnag from '@bugsnag/js';
 
 const $store = useStore();
+const $router = useRouter();
 
-console.log($store.state);
-$store.commit('setJWT', 'new.jwt.string');
-console.log($store.state);
 const _authService: AuthService = inject('authService') as AuthService;
 
 const loading = ref(false);
@@ -369,13 +368,20 @@ async function onSubmit() {
     const res: ISignInResponse = await _authService.signin(credentials);
 
     if (res.accessToken) {
-      // TODO: Store our auth token
+      $store.commit('setJWT', res.accessToken);
+      $store.commit('authenticated', true);
+      $router.push({ path: '/dashboard' });
+    } else {
+      //Bugsnag.notify(new Error('No access token returned'));
     }
   } catch (error: AxiosError | any) {
     errorHeading.value = 'Unable to login';
     if (error.response) {
-      if (error.response.data?.message?.length) {
+      if (error.response.data?.statusCode === 400) {
         errors.value = error.response.data.message;
+      } else if (error.response.data?.statusCode === 401) {
+        errorHeading.value = error.response.data.message;
+        errors.value = [];
       }
     } else {
       //Bugsnag.notify(new Error(error));

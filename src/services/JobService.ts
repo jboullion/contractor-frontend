@@ -1,32 +1,33 @@
 import { IJob, IJobCreate } from '../types/Job';
+import store from '../store';
 export interface IJobService {
   /**
    * Retrieves all jobs for current user
    */
-  getMyJobs(token: string, query?: string): Promise<IJob[]>;
+  getMyJobs(query?: string): Promise<IJob[]>;
 
   /**
    * Retrieves all jobs for current user
    */
-  createJob(token: string, data: IJobCreate): Promise<IJob>;
+  createJob(data: IJobCreate): Promise<IJob>;
 }
 
 export default class JobService implements IJobService {
   constructor(private _axios: any) {}
 
-  private setHeaders(token: string) {
+  private setHeaders() {
     return {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${store.getters.jwt}` },
     };
   }
 
-  async getMyJobs(token: string, query?: string): Promise<IJob[]> {
-    const res = await this._axios.get(`/jobs?${query}`, this.setHeaders(token));
+  async getMyJobs(query?: string): Promise<IJob[]> {
+    const res = await this._axios.get(`/jobs?${query}`, this.setHeaders());
     return res.data;
   }
 
-  async createJob(token: string, data: IJobCreate): Promise<IJob> {
-    const res = await this._axios.post(`/jobs`, data, this.setHeaders(token));
+  async createJob(data: IJobCreate): Promise<IJob> {
+    const res = await this._axios.post(`/jobs`, data, this.setHeaders());
     return res.data;
   }
 }

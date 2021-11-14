@@ -133,15 +133,12 @@ import { IJob } from '../../../types/Job';
 
 const _jobService: JobService = inject('jobService') as JobService;
 
-const TEST_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impib3VsbGlvbiIsImlhdCI6MTYzNjg2MDU5OCwiZXhwIjoxNjM2ODY0MTk4fQ.nKGaem2FL64Azu5LlUXoLRDaXBmPkkslD430GaznHw0';
-
 const jobs = ref<IJob[]>([]);
 const loading = ref(true);
 
 onMounted(async () => {
   try {
-    jobs.value = await _jobService.getMyJobs(TEST_TOKEN);
+    jobs.value = await _jobService.getMyJobs();
   } catch (error: AxiosError | any) {
     if (error.response) {
       // Access to config, request, and response

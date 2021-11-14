@@ -427,10 +427,7 @@ import JobService from '../../../services/JobService';
 import { IJob, IJobCreate } from '../../../types/Job';
 import DropdownSelect from '@/components/ui/DropdownSelect.vue';
 
-const _jobService: JobService = inject('jobsService') as JobService;
-
-const TEST_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impib3VsbGlvbiIsImlhdCI6MTYzNjg2MDU5OCwiZXhwIjoxNjM2ODY0MTk4fQ.nKGaem2FL64Azu5LlUXoLRDaXBmPkkslD430GaznHw0';
+const _jobService: JobService = inject('jobService') as JobService;
 
 const job = ref<IJob>();
 const loading = ref(false);
@@ -493,7 +490,7 @@ async function onSubmit() {
       description: form.description,
     };
 
-    job.value = await _jobService.createJob(TEST_TOKEN, jobCreate);
+    job.value = await _jobService.createJob(jobCreate);
   } catch (error: AxiosError | any) {
     if (error.response) {
       // Access to config, request, and response
