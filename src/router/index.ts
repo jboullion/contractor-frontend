@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from 'vue-router';
 
 // Lazy Load pages
 const Home = () => import('../views/layouts/Home.vue');
-const Auth = () => import('../views/layouts/Authentication.vue');
+const Authentication = () => import('../views/layouts/Authentication.vue');
 const Application = () => import('../views/layouts/Application.vue');
 
 const Login = () => import('../views/auth/Login.vue');
@@ -36,7 +36,7 @@ const routes = [
   },
   {
     path: '/auth',
-    component: Login,
+    component: Authentication,
     meta: redirectAuth,
     children: [
       {
@@ -98,7 +98,7 @@ const router = createRouter({
 });
 
 // TODO: Update to pull from Vuex Store when that is setup
-const isAuthenticated = true;
+const isAuthenticated = false;
 
 // https://next.router.vuejs.org/guide/advanced/navigation-guards.html
 router.beforeEach((to, from, next) => {

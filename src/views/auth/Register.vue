@@ -7,7 +7,7 @@
         alt="Workflow"
       />
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Sign in to your account
+        Create your account today!
       </h2>
       <p class="mt-2 text-center text-sm text-gray-600">
         Or
@@ -81,36 +81,6 @@
                   sm:text-sm
                 "
               />
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                class="
-                  h-4
-                  w-4
-                  text-indigo-600
-                  focus:ring-indigo-500
-                  border-gray-300
-                  rounded
-                "
-              />
-              <label for="remember-me" class="ml-2 block text-sm text-gray-900">
-                Remember me
-              </label>
-            </div>
-
-            <div class="text-sm">
-              <a
-                href="#"
-                class="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </a>
             </div>
           </div>
 

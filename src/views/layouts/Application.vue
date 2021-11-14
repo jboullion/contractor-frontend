@@ -303,7 +303,7 @@ import {
   XIcon,
 } from '@heroicons/vue/outline';
 import { SearchIcon } from '@heroicons/vue/solid';
-import AppNavigation from './components/common/AppNavigation.vue';
+import AppNavigation from '@/components/common/AppNavigation.vue';
 
 const navigation = [
   { name: 'Dashboard', to: '/', icon: HomeIcon, current: true },

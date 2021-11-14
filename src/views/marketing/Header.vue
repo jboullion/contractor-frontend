@@ -64,8 +64,8 @@
             ring-1 ring-black ring-opacity-5
           "
         >
-          <a
-            href="#"
+          <router-link
+            to="/login"
             class="
               inline-flex
               items-center
@@ -81,7 +81,7 @@
             "
           >
             Log in
-          </a>
+          </router-link>
         </span>
       </div>
     </nav>
@@ -165,8 +165,8 @@
               >{{ item.name }}</a
             >
           </div>
-          <a
-            href="#"
+          <router-link
+            to="/login"
             class="
               block
               w-full
@@ -180,7 +180,7 @@
             "
           >
             Log in
-          </a>
+          </router-link>
         </div>
       </PopoverPanel>
     </transition>
