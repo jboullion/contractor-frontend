@@ -318,7 +318,7 @@ import AuthService from '../../services/AuthService';
 import { AxiosError } from 'axios';
 import { inject, onMounted, reactive, ref } from 'vue';
 import { IAuthCredentials, ISignInResponse } from '../../types/Auth';
-import AuthError from './AuthError.vue';
+import AuthError from '../../components/AuthError.vue';
 import Bugsnag from '@bugsnag/js';
 
 const _authService: AuthService = inject('authService') as AuthService;

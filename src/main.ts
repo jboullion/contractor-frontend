@@ -9,9 +9,9 @@ import JobService from './services/JobService';
 import Bugsnag from '@bugsnag/js';
 import BugsnagPluginVue from '@bugsnag/plugin-vue';
 
-import './index.css'; // Tailwind
-
 import { registerSW } from 'virtual:pwa-register';
+
+import './index.css'; // Tailwind
 
 const swIntervalMS = 60 * 60 * 1000;
 

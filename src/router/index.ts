@@ -12,7 +12,7 @@ const Dashboard = () => import('../views/app/Dashboard.vue');
 
 const JobsList = () => import('../views/app/jobs/JobsList.vue');
 const JobsCreate = () => import('../views/app/jobs/JobsCreate.vue');
-const JobsView = () => import('../views/app/jobs/JobsView.vue');
+const JobsView = () => import('../views/app/jobs/JobsSingle.vue');
 const JobsEdit = () => import('../views/app/jobs/JobsEdit.vue');
 
 // const Experiments = () => import("../components/pages/Experiments.vue");
