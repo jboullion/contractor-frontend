@@ -20,7 +20,7 @@
                 <StringInput
                   :name="'job-name'"
                   :label="'Job Name'"
-                  v-model="form.jobName"
+                  v-model.trim="form.jobName"
                   :type="'text'"
                   :error="form.errors.jobName"
                   maxlength="100"
@@ -30,7 +30,7 @@
                 <StringInput
                   :name="'description'"
                   :label="'Description'"
-                  v-model="form.description"
+                  v-model.trim="form.description"
                   :type="'text'"
                   :error="form.errors.description"
                   maxlength="255"
@@ -39,7 +39,7 @@
                 <StringInput
                   :name="'first-name'"
                   :label="'Contact First Name'"
-                  v-model="form.firstName"
+                  v-model.trim="form.firstName"
                   :type="'text'"
                   :error="form.errors.firstName"
                   autocomplete="given-name"
@@ -49,7 +49,7 @@
                 <StringInput
                   :name="'last-name'"
                   :label="'Contact Last Name'"
-                  v-model="form.lastName"
+                  v-model.trim="form.lastName"
                   :type="'text'"
                   :error="form.errors.lastName"
                   autocomplete="family-name"
@@ -59,7 +59,7 @@
                 <StringInput
                   :name="'email'"
                   :label="'Email'"
-                  v-model="form.email"
+                  v-model.trim="form.email"
                   :type="'email'"
                   :error="form.errors.email"
                   autocomplete="email"
@@ -69,7 +69,7 @@
                 <StringInput
                   :name="'street-address'"
                   :label="'Address'"
-                  v-model="form.address"
+                  v-model.trim="form.address"
                   :type="'text'"
                   :error="form.errors.address"
                   autocomplete="street-address"
@@ -79,7 +79,7 @@
                 <StringInput
                   :name="'city'"
                   :label="'City'"
-                  v-model="form.city"
+                  v-model.trim="form.city"
                   :type="'text'"
                   :error="form.errors.city"
                   autocomplete="address-level2"
@@ -89,7 +89,7 @@
                 <StringInput
                   :name="'state'"
                   :label="'State'"
-                  v-model="form.state"
+                  v-model.trim="form.state"
                   :type="'text'"
                   :error="form.errors.state"
                   autocomplete="address-level1"
@@ -99,7 +99,7 @@
                 <StringInput
                   :name="'zip'"
                   :label="'ZIP / Postal code'"
-                  v-model="form.zip"
+                  v-model.trim="form.zip"
                   :type="'text'"
                   :error="form.errors.zip"
                   autocomplete="postal-code"
@@ -109,7 +109,7 @@
                 <DropdownSelect
                   :name="'country'"
                   :label="'Country'"
-                  v-model="form.country"
+                  v-model.trim="form.country"
                   :options="[
                     { label: 'United States', value: 'us' },
                     { label: 'Canada', value: 'ca' },
@@ -430,7 +430,7 @@ import DropdownSelect from '../../components/ui/DropdownSelect.vue';
 const _jobsService: JobService = inject('jobsService') as JobService;
 
 const TEST_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impib3VsbGlvbiIsImlhdCI6MTYzNjg0MjQ0OCwiZXhwIjoxNjM2ODQ2MDQ4fQ.O1ht01mvTJtOCUuumfJ5Ynik3rhlSHwKtU-zKGspi6I';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impib3VsbGlvbiIsImlhdCI6MTYzNjg2MDU5OCwiZXhwIjoxNjM2ODY0MTk4fQ.nKGaem2FL64Azu5LlUXoLRDaXBmPkkslD430GaznHw0';
 
 const job = ref<IJob>();
 const loading = ref(false);

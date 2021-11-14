@@ -134,7 +134,7 @@ import { IJob } from '../../types/Job';
 const _jobsService: JobService = inject('jobsService') as JobService;
 
 const TEST_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impib3VsbGlvbiIsImlhdCI6MTYzNjgzNjczMCwiZXhwIjoxNjM2ODQwMzMwfQ._Iz3WFIF2yWIqsEPOkoFgB42YPhnKpPU8vh3kZl0j24';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impib3VsbGlvbiIsImlhdCI6MTYzNjg2MDU5OCwiZXhwIjoxNjM2ODY0MTk4fQ.nKGaem2FL64Azu5LlUXoLRDaXBmPkkslD430GaznHw0';
 
 const jobs = ref<IJob[]>([]);
 const loading = ref(true);

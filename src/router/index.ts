@@ -1,7 +1,9 @@
 import { createWebHistory, createRouter } from 'vue-router';
 
 // Lazy Load pages
-const Home = () => import('../views/Home.vue');
+const Login = () => import('../views/auth/Login.vue');
+
+const Dashboard = () => import('../views/Dashboard.vue');
 
 const JobsList = () => import('../views/jobs/JobsList.vue');
 const JobsCreate = () => import('../views/jobs/JobsCreate.vue');
@@ -16,8 +18,17 @@ const NotFound = () => import('../views/NotFound.vue');
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Dashboard',
+    component: Dashboard, // TODO: This should be the marketing / landing page eventually
+  },
+  {
+    path: '/login',
+    component: Login,
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
   },
   {
     path: '/jobs',
