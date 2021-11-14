@@ -15,6 +15,14 @@ const JobsEdit = () => import('../views/jobs/JobsEdit.vue');
 // const Games = () => import("../components/pages/Games.vue");
 const NotFound = () => import('../views/NotFound.vue');
 
+const requiresAuth = {
+  requiresAuth: true,
+};
+
+const redirectAuth = {
+  redirectAuth: true,
+};
+
 const routes = [
   {
     path: '/',
@@ -24,28 +32,34 @@ const routes = [
   {
     path: '/login',
     component: Login,
+    meta: redirectAuth,
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
+    meta: requiresAuth,
   },
   {
     path: '/jobs',
     name: 'Jobs',
     component: JobsList,
+    meta: requiresAuth,
   },
   {
     path: '/jobs/create',
     component: JobsCreate,
+    meta: requiresAuth,
   },
   {
     path: '/jobs/:id',
     component: JobsView,
+    meta: requiresAuth,
   },
   {
     path: '/jobs/:id/edit',
     component: JobsEdit,
+    meta: requiresAuth,
   },
   {
     path: '/:catchAll(.*)',
@@ -65,10 +79,14 @@ const router = createRouter({
   },
 });
 
+// TODO: Update to pull from Vuex Store when that is setup
+const isAuthenticated = true;
+
 // https://next.router.vuejs.org/guide/advanced/navigation-guards.html
-// router.beforeEach((to, from, next) => {
-//   if (to.name !== 'Login' && to.name !== 'Home' && !isAuthenticated) next({ name: 'Login' })
-//   else next()
-// })
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !isAuthenticated) next('/login');
+  else if (to.meta.redirectAuth && isAuthenticated) next('/dashboard');
+  else next();
+});
 
 export default router;
