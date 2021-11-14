@@ -6,8 +6,8 @@ import axios from 'axios';
 import AuthService from './services/AuthService';
 import JobService from './services/JobService';
 
-import Bugsnag from '@bugsnag/js';
-import BugsnagPluginVue from '@bugsnag/plugin-vue';
+// import Bugsnag from '@bugsnag/js';
+// import BugsnagPluginVue from '@bugsnag/plugin-vue';
 
 import { registerSW } from 'virtual:pwa-register';
 
@@ -25,17 +25,17 @@ const $axios = axios.create({
 const authService = new AuthService($axios);
 const jobService = new JobService($axios);
 
-Bugsnag.start({
-  apiKey: import.meta.env.VITE_BUGSNAG_APIKEY as string,
-  plugins: [new BugsnagPluginVue()],
-});
+// Bugsnag.start({
+//   apiKey: import.meta.env.VITE_BUGSNAG_APIKEY as string,
+//   plugins: [new BugsnagPluginVue()],
+// });
 
-const bugsnagVue = Bugsnag.getPlugin('vue');
+//const bugsnagVue = Bugsnag.getPlugin('vue');
 
 const app = createApp(App);
 
 // @ts-ignore
-app.use(router).use(bugsnagVue).mount('#app');
+app.use(router).mount('#app'); // .use(bugsnagVue)
 
 app.provide('axios', $axios);
 app.provide('authService', authService);

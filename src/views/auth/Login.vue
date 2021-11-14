@@ -319,7 +319,7 @@ import { AxiosError } from 'axios';
 import { inject, onMounted, reactive, ref } from 'vue';
 import { IAuthCredentials, ISignInResponse } from '../../types/Auth';
 import AuthError from '../../components/AuthError.vue';
-import Bugsnag from '@bugsnag/js';
+//import Bugsnag from '@bugsnag/js';
 
 const _authService: AuthService = inject('authService') as AuthService;
 
@@ -370,7 +370,7 @@ async function onSubmit() {
         errors.value = error.response.data.message;
       }
     } else {
-      Bugsnag.notify(new Error(error));
+      //Bugsnag.notify(new Error(error));
     }
   } finally {
     loading.value = false;
