@@ -1,5 +1,5 @@
 import { IAuthCredentials, ISignInResponse, User } from '../types/Auth';
-import store from '../store';
+// import store from '../store';
 
 const BASE_URL = '/auth';
 
