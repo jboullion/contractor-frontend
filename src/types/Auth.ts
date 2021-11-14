@@ -4,6 +4,12 @@ export interface IAuthCredentials {
   email: string;
   password: string;
 }
+
+export interface IAuthRefreshCredentials {
+  email: string;
+  refreshToken: string;
+}
+
 export interface ISignInResponse {
   accessToken: string;
   refreshToken: string;

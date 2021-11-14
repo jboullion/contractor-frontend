@@ -1,5 +1,10 @@
-import { IAuthCredentials, ISignInResponse, User } from '../types/Auth';
-// import store from '../store';
+import {
+  IAuthCredentials,
+  IAuthRefreshCredentials,
+  ISignInResponse,
+  User,
+} from '../types/Auth';
+import store from '../store';
 
 const BASE_URL = '/auth';
 
@@ -15,9 +20,14 @@ export interface IAuthService {
   signup(credentials: IAuthCredentials): Promise<User>;
 
   /**
+   * Refresh our authentication
+   */
+  refresh(credentials: IAuthRefreshCredentials): Promise<User>;
+
+  /**
    * Log a user out
    */
-  //signout(): Promise<void>;
+  signout(): void;
 }
 
 export default class AuthService implements IAuthService {
@@ -30,6 +40,8 @@ export default class AuthService implements IAuthService {
       email,
       password,
     });
+
+    this.updateAccess(res.data);
     return res.data;
   }
 
@@ -43,8 +55,33 @@ export default class AuthService implements IAuthService {
     return res.data;
   }
 
-  // async signout(): Promise<void> {
-  //   localStorage.removeItem('accessToken');
-  //   store.commit('setJWT', '');
-  // }
+  async refresh(credentials: IAuthRefreshCredentials): Promise<User> {
+    const { email, refreshToken } = credentials;
+
+    const res = await this._axios.post(`${BASE_URL}/refresh`, {
+      email,
+      refreshToken,
+    });
+    this.updateAccess(res.data);
+    return res.data;
+  }
+
+  signout(): void {
+    store.commit('setAccessToken', '');
+    store.commit('setRefreshToken', '');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('accessExpires');
+  }
+
+  private updateAccess(tokens: ISignInResponse) {
+    store.commit('setAccessToken', tokens.accessToken);
+    localStorage.setItem('accessToken', tokens.accessToken);
+    store.commit('setRefreshToken', tokens.refreshToken);
+    localStorage.setItem('refreshToken', tokens.refreshToken);
+
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    localStorage.setItem('accessExpires', expires.toString());
+  }
 }

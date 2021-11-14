@@ -250,14 +250,26 @@
                     :key="item.name"
                     v-slot="{ active }"
                   >
-                    <a
-                      :href="item.href"
+                    <router-link
+                      :to="item.to"
                       :class="[
                         active ? 'bg-gray-100' : '',
                         'block px-4 py-2 text-sm text-gray-700',
                       ]"
-                      >{{ item.name }}</a
+                      >{{ item.name }}</router-link
                     >
+                  </MenuItem>
+                  <MenuItem v-slot="{ active }">
+                    <a
+                      href="#"
+                      :class="[
+                        active ? 'bg-gray-100' : '',
+                        'block px-4 py-2 text-sm text-gray-700',
+                      ]"
+                      @click.prevent="logout"
+                    >
+                      Sign Out
+                    </a>
                   </MenuItem>
                 </MenuItems>
               </transition>
@@ -279,8 +291,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { ref } from 'vue';
+<script setup lang="ts">
+import { ref, inject } from 'vue';
 import {
   Dialog,
   DialogOverlay,
@@ -304,6 +316,11 @@ import {
 } from '@heroicons/vue/outline';
 import { SearchIcon } from '@heroicons/vue/solid';
 import AppNavigation from '@/components/common/AppNavigation.vue';
+import AuthService from '../../services/AuthService';
+import { useRouter } from 'vue-router';
+
+const $router = useRouter();
+const _authService: AuthService = inject('authService') as AuthService;
 
 const navigation = [
   { name: 'Dashboard', to: '/', icon: HomeIcon, current: true },
@@ -314,37 +331,16 @@ const navigation = [
   { name: 'Reports', to: '/', icon: ChartBarIcon, current: false },
 ];
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Your Profile', to: '/profile' },
+  { name: 'Settings', to: '/settings' },
 ];
 
-export default {
-  components: {
-    Dialog,
-    DialogOverlay,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    TransitionChild,
-    TransitionRoot,
-    BellIcon,
-    MenuAlt2Icon,
-    SearchIcon,
-    XIcon,
-    AppNavigation,
-  },
-  setup() {
-    const sidebarOpen = ref(false);
+const sidebarOpen = ref(false);
 
-    return {
-      navigation,
-      userNavigation,
-      sidebarOpen,
-    };
-  },
-};
+function logout() {
+  _authService.signout();
+  $router.push({ path: '/' });
+}
 </script>
 
 <style>

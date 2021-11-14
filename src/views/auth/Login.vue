@@ -320,12 +320,10 @@ import { computed, inject, onMounted, reactive, ref } from 'vue';
 import { IAuthCredentials, ISignInResponse } from '../../types/Auth';
 import AuthError from '../../components/AuthError.vue';
 
-import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
 //import Bugsnag from '@bugsnag/js';
 
-const $store = useStore();
 const $router = useRouter();
 
 const _authService: AuthService = inject('authService') as AuthService;
@@ -368,10 +366,6 @@ async function onSubmit() {
     const res: ISignInResponse = await _authService.signin(credentials);
 
     if (res.accessToken) {
-      $store.commit('setAccessToken', res.accessToken);
-      localStorage.setItem('accessToken', res.accessToken);
-      $store.commit('setRefreshToken', res.refreshToken);
-      localStorage.setItem('refreshToken', res.refreshToken);
       $router.push({ path: '/dashboard' });
     } else {
       //Bugsnag.notify(new Error('No access token returned'));
