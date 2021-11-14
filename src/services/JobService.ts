@@ -1,10 +1,5 @@
-// TODO: CREATE A JOBS SERVICE!!
-// https://www.youtube.com/watch?v=-BYZAO99UVA
-// import http from './http-common';
-
 import { IJob, IJobCreate } from '../types/Job';
-
-export interface IJobsService {
+export interface IJobService {
   /**
    * Retrieves all jobs for current user
    */
@@ -16,7 +11,7 @@ export interface IJobsService {
   createJob(token: string, data: IJobCreate): Promise<IJob>;
 }
 
-export default class JobService {
+export default class JobService implements IJobService {
   constructor(private _axios: any) {}
 
   private setHeaders(token: string) {

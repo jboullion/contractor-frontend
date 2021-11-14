@@ -233,3 +233,70 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import AuthService from '../../services/AuthService';
+import { AxiosError } from 'axios';
+import { inject, reactive, ref } from 'vue';
+import { IAuthCredentials, ISignInResponse, User } from '../../types/Auth';
+
+const _authService: AuthService = inject('authService') as AuthService;
+
+const loading = ref(false);
+const formValid = ref(true);
+const responseError = ref('');
+
+const form = reactive({
+  email: '',
+  password: '',
+  errors: {
+    email: '',
+    password: '',
+  },
+});
+
+async function onSubmit() {
+  if (!form.email) {
+    form.errors.email = 'Email is Required';
+    formValid.value = false;
+  }
+
+  if (!form.password) {
+    form.errors.password = 'Password is Required';
+    formValid.value = false;
+  }
+
+  if (!formValid.value) return;
+
+  try {
+    loading.value = true;
+
+    const credentials: IAuthCredentials = {
+      email: form.email,
+      password: form.password,
+    };
+
+    const res: User = await _authService.signup(credentials);
+
+    if (res.id) {
+      // TODO: user created, router redirect to login page?
+      // TODO: auth
+    }
+  } catch (error: AxiosError | any) {
+    if (error.response) {
+      // Access to config, request, and response
+      console.log(error.response);
+      if (error.response.data?.message?.length) {
+        responseError.value = error.response.data.message[0];
+      } else {
+        responseError.value = 'Unable to login';
+      }
+    } else {
+      console.log(error);
+      responseError.value = 'Unable to login';
+    }
+  } finally {
+    loading.value = false;
+  }
+}
+</script>

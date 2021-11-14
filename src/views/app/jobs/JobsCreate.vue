@@ -423,17 +423,18 @@
 import StringInput from '@/components/ui/StringInput.vue';
 import { AxiosError } from 'axios';
 import { inject, reactive, ref } from 'vue';
-import JobService from '../../services/JobsService';
-import { IJob, IJobCreate } from '../../types/Job';
-import DropdownSelect from '../../components/ui/DropdownSelect.vue';
+import JobService from '../../../services/JobService';
+import { IJob, IJobCreate } from '../../../types/Job';
+import DropdownSelect from '@/components/ui/DropdownSelect.vue';
 
-const _jobsService: JobService = inject('jobsService') as JobService;
+const _jobService: JobService = inject('jobsService') as JobService;
 
 const TEST_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impib3VsbGlvbiIsImlhdCI6MTYzNjg2MDU5OCwiZXhwIjoxNjM2ODY0MTk4fQ.nKGaem2FL64Azu5LlUXoLRDaXBmPkkslD430GaznHw0';
 
 const job = ref<IJob>();
 const loading = ref(false);
+const formValid = ref(true);
 
 const form = reactive({
   jobName: '',
@@ -463,6 +464,7 @@ const form = reactive({
 async function onSubmit() {
   if (!form.jobName) {
     form.errors.jobName = 'Job Name is Required';
+    formValid.value = false;
   }
 
   // if (!form.firstName) {
@@ -481,6 +483,8 @@ async function onSubmit() {
   //   form.errors.city = 'City is required';
   // }
 
+  if (!formValid.value) return;
+
   try {
     loading.value = true;
 
@@ -489,7 +493,7 @@ async function onSubmit() {
       description: form.description,
     };
 
-    job.value = await _jobsService.createJob(TEST_TOKEN, jobCreate);
+    job.value = await _jobService.createJob(TEST_TOKEN, jobCreate);
   } catch (error: AxiosError | any) {
     if (error.response) {
       // Access to config, request, and response

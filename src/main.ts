@@ -3,10 +3,12 @@ import App from './App.vue';
 import router from './router';
 
 import axios from 'axios';
+import AuthService from './services/AuthService';
+import JobService from './services/JobService';
 
-import './index.css';
+import './index.css'; // Tailwind
+
 import { registerSW } from 'virtual:pwa-register';
-import JobService from './services/JobsService';
 
 const swIntervalMS = 60 * 60 * 1000;
 
@@ -17,14 +19,16 @@ const $axios = axios.create({
   },
 });
 
-const jobsService = new JobService($axios);
+const authService = new AuthService($axios);
+const jobService = new JobService($axios);
 
 const app = createApp(App);
 
 app.use(router).mount('#app');
 
 app.provide('axios', $axios);
-app.provide('jobsService', jobsService);
+app.provide('authService', authService);
+app.provide('jobService', jobService);
 
 const updateSW = registerSW({
   onRegistered(r) {

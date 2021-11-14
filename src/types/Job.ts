@@ -1,4 +1,4 @@
-import { User } from './User';
+import { User } from './Auth';
 
 export enum JobStatus {
   OPEN = 'OPEN',

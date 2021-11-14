@@ -35,7 +35,7 @@ const routes = [
     component: Home,
   },
   {
-    path: '/auth',
+    path: '/login',
     component: Authentication,
     meta: redirectAuth,
     children: [

@@ -128,10 +128,10 @@
 <script setup lang="ts">
 import { AxiosError } from 'axios';
 import { inject, onMounted, ref } from 'vue';
-import JobService from '../../services/JobsService';
-import { IJob } from '../../types/Job';
+import JobService from '../../../services/JobService';
+import { IJob } from '../../../types/Job';
 
-const _jobsService: JobService = inject('jobsService') as JobService;
+const _jobService: JobService = inject('jobService') as JobService;
 
 const TEST_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impib3VsbGlvbiIsImlhdCI6MTYzNjg2MDU5OCwiZXhwIjoxNjM2ODY0MTk4fQ.nKGaem2FL64Azu5LlUXoLRDaXBmPkkslD430GaznHw0';
@@ -141,7 +141,7 @@ const loading = ref(true);
 
 onMounted(async () => {
   try {
-    jobs.value = await _jobsService.getMyJobs(TEST_TOKEN);
+    jobs.value = await _jobService.getMyJobs(TEST_TOKEN);
   } catch (error: AxiosError | any) {
     if (error.response) {
       // Access to config, request, and response

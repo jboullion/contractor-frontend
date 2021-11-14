@@ -20,18 +20,24 @@
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-        <form class="space-y-6" action="#" method="POST">
+        <AuthError
+          v-if="errorHeading"
+          class="mb-4"
+          :heading="errorHeading"
+          :errors="errors"
+        />
+        <form class="space-y-6" @submit.prevent="onSubmit">
           <div>
             <label for="email" class="block text-sm font-medium text-gray-700">
               Email address
             </label>
-            <div class="mt-1">
+            <div class="mt-1 relative">
               <input
                 id="email"
                 name="email"
                 type="email"
+                v-model.trim="form.email"
                 autocomplete="email"
-                required
                 class="
                   appearance-none
                   block
@@ -43,11 +49,32 @@
                   shadow-sm
                   placeholder-gray-400
                   focus:outline-none
-                  focus:ring-indigo-500
-                  focus:border-indigo-500
                   sm:text-sm
                 "
+                :class="{
+                  'border-red-300 focus:ring-red-500 focus:border-red-500':
+                    form.errors.email,
+                  'focus:ring-indigo-500 focus:border-indigo-500':
+                    !form.errors.email,
+                }"
               />
+              <div
+                v-if="form.errors.email"
+                class="
+                  absolute
+                  inset-y-0
+                  right-0
+                  pr-3
+                  flex
+                  items-center
+                  pointer-events-none
+                "
+              >
+                <ExclamationCircleIcon
+                  class="h-5 w-5 text-red-500"
+                  aria-hidden="true"
+                />
+              </div>
             </div>
           </div>
 
@@ -58,13 +85,13 @@
             >
               Password
             </label>
-            <div class="mt-1">
+            <div class="mt-1 relative">
               <input
                 id="password"
                 name="password"
                 type="password"
+                v-model.trim="form.password"
                 autocomplete="current-password"
-                required
                 class="
                   appearance-none
                   block
@@ -76,11 +103,32 @@
                   shadow-sm
                   placeholder-gray-400
                   focus:outline-none
-                  focus:ring-indigo-500
-                  focus:border-indigo-500
                   sm:text-sm
                 "
+                :class="{
+                  'border-red-300 focus:ring-red-500 focus:border-red-500':
+                    form.errors.password,
+                  'focus:ring-indigo-500 focus:border-indigo-500':
+                    !form.errors.password,
+                }"
               />
+              <div
+                v-if="form.errors.password"
+                class="
+                  absolute
+                  inset-y-0
+                  right-0
+                  pr-3
+                  flex
+                  items-center
+                  pointer-events-none
+                "
+              >
+                <ExclamationCircleIcon
+                  class="h-5 w-5 text-red-500"
+                  aria-hidden="true"
+                />
+              </div>
             </div>
           </div>
 
@@ -263,3 +311,66 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { ExclamationCircleIcon } from '@heroicons/vue/solid';
+import AuthService from '../../services/AuthService';
+import { AxiosError } from 'axios';
+import { inject, reactive, ref } from 'vue';
+import { IAuthCredentials, ISignInResponse } from '../../types/Auth';
+import AuthError from './AuthError.vue';
+
+const _authService: AuthService = inject('authService') as AuthService;
+
+const loading = ref(false);
+const formValid = ref(true);
+const errorHeading = ref('');
+const errors = ref<String[]>([]);
+
+const form = reactive({
+  email: '',
+  password: '',
+  errors: {
+    email: '',
+    password: '',
+  },
+});
+
+async function onSubmit() {
+  if (!form.email) {
+    form.errors.email = 'Email is Required';
+    formValid.value = false;
+  }
+
+  if (!form.password) {
+    form.errors.password = 'Password is Required';
+    formValid.value = false;
+  }
+
+  if (!formValid.value) return;
+
+  try {
+    loading.value = true;
+
+    const credentials: IAuthCredentials = {
+      email: form.email,
+      password: form.password,
+    };
+
+    const res: ISignInResponse = await _authService.signin(credentials);
+
+    if (res.accessToken) {
+      // TODO: Store our auth token
+    }
+  } catch (error: AxiosError | any) {
+    errorHeading.value = 'Unable to login';
+    if (error.response) {
+      if (error.response.data?.message?.length) {
+        errors.value = error.response.data.message;
+      }
+    }
+  } finally {
+    loading.value = false;
+  }
+}
+</script>

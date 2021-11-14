@@ -1,5 +1,13 @@
 import { IJob } from './Job';
 
+export interface IAuthCredentials {
+  email: string;
+  password: string;
+}
+export interface ISignInResponse {
+  accessToken: string;
+}
+
 export enum UserStatus {
   UNACTIVATED = 'UNACTIVATED',
   ACTIVATED = 'ACTIVATED',
@@ -11,7 +19,7 @@ export enum UserStatus {
 
 export interface User {
   id: number;
-  username: string;
+  email: string;
   status: UserStatus;
   jobs?: IJob[];
   createdAt: Date;
