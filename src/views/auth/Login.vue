@@ -316,11 +316,19 @@
 import { ExclamationCircleIcon } from '@heroicons/vue/solid';
 import AuthService from '../../services/AuthService';
 import { AxiosError } from 'axios';
-import { inject, onMounted, reactive, ref } from 'vue';
+import { computed, inject, onMounted, reactive, ref } from 'vue';
 import { IAuthCredentials, ISignInResponse } from '../../types/Auth';
 import AuthError from '../../components/AuthError.vue';
+
+import { useStore } from 'vuex';
+
 //import Bugsnag from '@bugsnag/js';
 
+const $store = useStore();
+
+console.log($store.state);
+$store.commit('setJWT', 'new.jwt.string');
+console.log($store.state);
 const _authService: AuthService = inject('authService') as AuthService;
 
 const loading = ref(false);

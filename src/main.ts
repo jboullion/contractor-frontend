@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import store from './store';
 
 import axios from 'axios';
 import AuthService from './services/AuthService';
@@ -35,7 +36,7 @@ const jobService = new JobService($axios);
 const app = createApp(App);
 
 // @ts-ignore
-app.use(router).mount('#app'); // .use(bugsnagVue)
+app.use(router).use(store).mount('#app'); // .use(bugsnagVue)
 
 app.provide('axios', $axios);
 app.provide('authService', authService);
