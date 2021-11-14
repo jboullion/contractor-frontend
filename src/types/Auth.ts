@@ -6,6 +6,7 @@ export interface IAuthCredentials {
 }
 export interface ISignInResponse {
   accessToken: string;
+  refreshToken: string;
 }
 
 export enum UserStatus {

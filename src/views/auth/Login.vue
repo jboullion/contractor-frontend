@@ -368,8 +368,10 @@ async function onSubmit() {
     const res: ISignInResponse = await _authService.signin(credentials);
 
     if (res.accessToken) {
-      $store.commit('setJWT', res.accessToken);
+      $store.commit('setAccessToken', res.accessToken);
       localStorage.setItem('accessToken', res.accessToken);
+      $store.commit('setRefreshToken', res.refreshToken);
+      localStorage.setItem('refreshToken', res.refreshToken);
       $router.push({ path: '/dashboard' });
     } else {
       //Bugsnag.notify(new Error('No access token returned'));
