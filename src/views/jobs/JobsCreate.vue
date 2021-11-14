@@ -486,7 +486,7 @@ async function onSubmit() {
 
     const jobCreate: IJobCreate = {
       title: form.jobName,
-      description: 'My first job from the front end',
+      description: form.description,
     };
 
     job.value = await _jobsService.createJob(TEST_TOKEN, jobCreate);
