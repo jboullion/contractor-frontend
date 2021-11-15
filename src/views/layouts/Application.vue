@@ -288,11 +288,12 @@
         </div>
       </main>
     </div>
+    <AuthTimeoutModal :open="sessionExpired" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from 'vue';
+import { ref, inject, onMounted, onBeforeUnmount } from 'vue';
 import {
   Dialog,
   DialogOverlay,
@@ -317,7 +318,10 @@ import {
 import { SearchIcon } from '@heroicons/vue/solid';
 import AppNavigation from '@/components/common/AppNavigation.vue';
 import AuthService from '../../services/AuthService';
+import AuthTimeoutModal from '@/components/auth/AuthTimeoutModal.vue';
 import { useRouter } from 'vue-router';
+import { IAuthRefreshCredentials } from '../../types/Auth';
+import { throttle, parseJwt } from '../../utils';
 
 const $router = useRouter();
 const _authService: AuthService = inject('authService') as AuthService;
@@ -336,11 +340,44 @@ const userNavigation = [
 ];
 
 const sidebarOpen = ref(false);
+const accessExpires = new Date(localStorage.getItem('accessExpires') as string);
+const sessionExpired = ref(false);
+const tHandler = throttle(60 * 1000, reAuth);
 
 function logout() {
   _authService.signout();
   $router.push({ path: '/' });
 }
+
+function checkAuth() {
+  const now = new Date();
+  if (now.getTime() > accessExpires.getTime()) {
+    document.removeEventListener('click', tHandler);
+    sessionExpired.value = true;
+  }
+}
+
+function reAuth() {
+  const accessToken: string = localStorage.getItem('accessToken') as string;
+  const refreshToken: string = localStorage.getItem('refreshToken') as string;
+
+  const decodedToken = parseJwt(accessToken);
+
+  const credentials: IAuthRefreshCredentials = {
+    email: decodedToken?.email,
+    refreshToken: refreshToken,
+  };
+  _authService.refresh(credentials);
+}
+
+onMounted(() => {
+  document.addEventListener('click', tHandler);
+  setInterval(checkAuth, 60 * 1000);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', tHandler);
+});
 </script>
 
 <style>

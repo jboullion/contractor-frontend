@@ -1,5 +1,7 @@
 <template>
-  <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div
+    class="min-h-full flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8"
+  >
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <img
         class="mx-auto h-12 w-auto"
@@ -318,7 +320,7 @@ import AuthService from '../../services/AuthService';
 import { AxiosError } from 'axios';
 import { computed, inject, onMounted, reactive, ref } from 'vue';
 import { IAuthCredentials, ISignInResponse } from '../../types/Auth';
-import AuthError from '../../components/AuthError.vue';
+import AuthError from '../../components/auth/AuthError.vue';
 
 import { useRouter } from 'vue-router';
 
