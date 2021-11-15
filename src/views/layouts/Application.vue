@@ -343,6 +343,12 @@ const sidebarOpen = ref(false);
 const accessExpires = new Date(localStorage.getItem('accessExpires') as string);
 const sessionExpired = ref(false);
 const tHandler = throttle(60 * 1000, reAuth);
+// https://www.codingwithjesse.com/blog/detect-browser-window-focus/
+const focusListener = (_e: Event) => {
+  if (document.visibilityState === 'visible' && !sessionExpired.value) {
+    checkAuth();
+  }
+};
 
 function logout() {
   _authService.signout();
@@ -351,7 +357,9 @@ function logout() {
 
 function checkAuth() {
   const now = new Date();
+
   if (now.getTime() > accessExpires.getTime()) {
+    document.removeEventListener('visibilitychange', focusListener);
     document.removeEventListener('click', tHandler);
     sessionExpired.value = true;
   }
@@ -372,10 +380,13 @@ function reAuth() {
 
 onMounted(() => {
   document.addEventListener('click', tHandler);
+  document.addEventListener('visibilitychange', focusListener);
+
   setInterval(checkAuth, 60 * 1000);
 });
 
 onBeforeUnmount(() => {
+  document.removeEventListener('visibilitychange', focusListener);
   document.removeEventListener('click', tHandler);
 });
 </script>
