@@ -33,11 +33,15 @@
 
       <main class="flex-1">
         <div class="py-6">
-          <router-view v-slot="{ Component }">
-            <transition name="route" mode="out-in">
-              <component :is="Component" />
-            </transition>
-          </router-view>
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+            <div class="flex flex-col">
+              <router-view v-slot="{ Component }">
+                <transition name="route" mode="out-in">
+                  <component :is="Component" />
+                </transition>
+              </router-view>
+            </div>
+          </div>
         </div>
       </main>
     </div>
