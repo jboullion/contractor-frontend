@@ -154,7 +154,7 @@ const $store = useStore();
 const _authService: AuthService = inject('authService') as AuthService;
 
 const userNavigation = [
-  { name: 'Your Profile', to: '/profile' },
+  //{ name: 'Your Profile', to: '/profile' },
   { name: 'Settings', to: '/settings' },
 ];
 
