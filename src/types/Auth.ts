@@ -15,6 +15,15 @@ export interface ISignInResponse {
   refreshToken: string;
 }
 
+export interface IAuthForm {
+  email: string;
+  password: string;
+  errors: {
+    email: string;
+    password: string;
+  };
+}
+
 export enum UserStatus {
   UNACTIVATED = 'UNACTIVATED',
   ACTIVATED = 'ACTIVATED',
@@ -24,7 +33,7 @@ export enum UserStatus {
   BANNED = 'BANNED',
 }
 
-export interface User {
+export interface IUser {
   id: number;
   email: string;
   status: UserStatus;
