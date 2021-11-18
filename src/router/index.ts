@@ -11,6 +11,8 @@ const Register = () => import('../views/auth/Register.vue');
 
 const Dashboard = () => import('../views/app/Dashboard.vue');
 
+const Settings = () => import('../views/app/Settings.vue');
+
 const JobsList = () => import('../views/app/jobs/JobsList.vue');
 const JobsCreate = () => import('../views/app/jobs/JobsCreate.vue');
 const JobsView = () => import('../views/app/jobs/JobsSingle.vue');
@@ -60,6 +62,11 @@ const routes = [
         path: '/dashboard',
         name: 'Dashboard',
         component: Dashboard,
+      },
+      {
+        path: '/settings',
+        name: 'Settings',
+        component: Settings,
       },
       {
         path: '/jobs',

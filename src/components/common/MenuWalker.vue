@@ -17,12 +17,7 @@
       >
         <component
           :is="item.icon"
-          :class="[
-            item.current
-              ? 'text-gray-500'
-              : 'text-gray-400 group-hover:text-gray-500',
-            'mr-3 flex-shrink-0 h-6 w-6',
-          ]"
+          class="nav-svg mr-3 flex-shrink-0 h-6 w-6"
           aria-hidden="true"
         />
         {{ item.name }}
@@ -30,12 +25,19 @@
     </div>
     <Disclosure as="div" v-else class="space-y-1" v-slot="{ open }">
       <DisclosureButton
-        :class="[
-          item.current
-            ? 'bg-gray-100 text-gray-900'
-            : 'bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-          'group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500',
-        ]"
+        class="
+          group
+          w-full
+          flex
+          items-center
+          pl-2
+          pr-1
+          py-2
+          text-left text-sm
+          font-medium
+          rounded-md
+          focus:outline-none focus:ring-2 focus:ring-indigo-500
+        "
       >
         <component
           :is="item.icon"
@@ -108,7 +110,15 @@ const props = defineProps({
   @apply bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900;
 }
 
+.group .nav-svg {
+  @apply text-gray-400 group-hover:text-gray-500;
+}
+
 .group.router-link-active {
   @apply bg-gray-100 text-gray-900;
+}
+
+.group.router-link-active .nav-svg {
+  @apply text-gray-500;
 }
 </style>
