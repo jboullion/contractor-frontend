@@ -5,6 +5,7 @@ import {
   User,
 } from '../types/Auth';
 import store from '../store';
+import router from '../router';
 
 const BASE_URL = '/auth';
 
@@ -73,6 +74,7 @@ export default class AuthService implements IAuthService {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('accessExpires');
+    router.push({ path: '/' });
   }
 
   private updateAccess(tokens: ISignInResponse) {

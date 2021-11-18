@@ -1,4 +1,8 @@
+import { inject } from 'vue';
 import { createStore } from 'vuex';
+import AuthService from '../services/AuthService';
+
+const _authService: AuthService = inject('authService') as AuthService;
 
 export default createStore({
   state: {
