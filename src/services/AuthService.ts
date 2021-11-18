@@ -69,6 +69,7 @@ export default class AuthService implements IAuthService {
   signout(): void {
     store.commit('setAccessToken', '');
     store.commit('setRefreshToken', '');
+    store.commit('setAccessExpires', '');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('accessExpires');
@@ -82,6 +83,7 @@ export default class AuthService implements IAuthService {
 
     const expires = new Date();
     expires.setHours(expires.getHours() + 1);
+    store.commit('setAccessExpires', expires.toString());
     localStorage.setItem('accessExpires', expires.toString());
   }
 }

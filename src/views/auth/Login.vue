@@ -388,4 +388,24 @@ async function onSubmit() {
     loading.value = false;
   }
 }
+
+onMounted(() => {
+  // if (!window.gapi) {
+  //   err('"https://apis.google.com/js/api:client.js" needs to be included as a <script>.')
+  //   return
+  // }
+  // if (!this.params.clientId && !this.params.client_id) {
+  //   err('Client Id must be specified.')
+  //   return
+  // }
+  // window.gapi.load('auth2', () => {
+  //   const auth2 = window.gapi.auth2.init(this.params)
+  //   auth2.attachClickHandler(this.$refs.signinBtn, {}, googleUser => {
+  //     this.$emit('success', googleUser)
+  //   }, error => {
+  //     this.$emit('error', error)
+  //     this.$emit('failure', error) // an alias
+  //   })
+  // })
+});
 </script>

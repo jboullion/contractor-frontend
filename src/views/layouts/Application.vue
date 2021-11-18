@@ -320,10 +320,13 @@ import AppNavigation from '@/components/common/AppNavigation.vue';
 import AuthService from '../../services/AuthService';
 import AuthTimeoutModal from '@/components/auth/AuthTimeoutModal.vue';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 import { IAuthRefreshCredentials } from '../../types/Auth';
 import { throttle, parseJwt } from '../../utils';
 
 const $router = useRouter();
+const $store = useStore();
+
 const _authService: AuthService = inject('authService') as AuthService;
 
 const navigation = [
@@ -340,10 +343,8 @@ const userNavigation = [
 ];
 
 const sidebarOpen = ref(false);
-const accessExpires = new Date(localStorage.getItem('accessExpires') as string);
 const sessionExpired = ref(false);
 const tHandler = throttle(60 * 1000, reAuth);
-// https://www.codingwithjesse.com/blog/detect-browser-window-focus/
 const focusListener = (_e: Event) => {
   if (document.visibilityState === 'visible' && !sessionExpired.value) {
     checkAuth();
@@ -357,10 +358,11 @@ function logout() {
 
 function checkAuth() {
   const now = new Date();
+  const accessExpires = new Date($store.state.accessExpires);
 
-  if (now.getTime() > accessExpires.getTime()) {
-    document.removeEventListener('visibilitychange', focusListener);
+  if (now.getTime() < accessExpires.getTime()) {
     document.removeEventListener('click', tHandler);
+    document.removeEventListener('visibilitychange', focusListener);
     sessionExpired.value = true;
   }
 }
@@ -381,13 +383,12 @@ function reAuth() {
 onMounted(() => {
   document.addEventListener('click', tHandler);
   document.addEventListener('visibilitychange', focusListener);
-
   setInterval(checkAuth, 60 * 1000);
 });
 
 onBeforeUnmount(() => {
-  document.removeEventListener('visibilitychange', focusListener);
   document.removeEventListener('click', tHandler);
+  document.removeEventListener('visibilitychange', focusListener);
 });
 </script>
 
