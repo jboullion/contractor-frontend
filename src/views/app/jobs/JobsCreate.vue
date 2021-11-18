@@ -2,7 +2,7 @@
   <div class="bg-white shadow overflow-hidden sm:rounded-lg">
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <JobForm
-        :formName="'Create'"
+        :formName="'Create Job'"
         :loading="loading"
         @submitSuccess="createJob"
       />
@@ -29,6 +29,14 @@ async function createJob(form: IJobForm) {
     const jobCreate: IJobSubmit = {
       title: form.title,
       description: form.description,
+      firstName: form.firstName,
+      lastName: form.lastName,
+      phone: form.phone,
+      email: form.email,
+      address: form.address,
+      city: form.city,
+      state: form.state,
+      zip: form.zip,
     };
 
     job.value = await _jobService.createJob(jobCreate);

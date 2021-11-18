@@ -4,7 +4,7 @@
       <div v-if="loading">Loading...</div>
       <div v-else-if="job">
         <JobForm
-          :formName="'Edit'"
+          :formName="'Edit Job'"
           :job="job"
           :loading="loading"
           @submitSuccess="updateJob"
@@ -38,6 +38,14 @@ async function updateJob(form: IJobForm) {
     const jobUpdate: IJobSubmit = {
       title: form.title,
       description: form.description,
+      firstName: form.firstName,
+      lastName: form.lastName,
+      phone: form.phone,
+      email: form.email,
+      address: form.address,
+      city: form.city,
+      state: form.state,
+      zip: form.zip,
     };
 
     job.value = await _jobService.updateJob(jobUpdate);

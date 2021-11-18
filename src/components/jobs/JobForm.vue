@@ -4,7 +4,7 @@
       <div class="space-y-6 sm:space-y-5">
         <div>
           <h3 class="text-lg leading-6 font-medium text-gray-900">
-            {{ formName }} Job
+            {{ props.formName }}
           </h3>
         </div>
         <div class="space-y-6 sm:space-y-5">
@@ -408,7 +408,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, ref, reactive, watch, PropType, onMounted } from 'vue';
+import { ref, reactive, watch, PropType, onMounted } from 'vue';
 import StringInput from '@/components/ui/StringInput.vue';
 import DropdownSelect from '@/components/ui/DropdownSelect.vue';
 import { IJob, IJobForm } from '../../types/Job';
@@ -420,6 +420,7 @@ const form = reactive({
   description: '',
   firstName: '',
   lastName: '',
+  phone: '',
   email: '',
   address: '',
   city: '',
@@ -433,6 +434,7 @@ const errors = reactive({
   description: '',
   firstName: '',
   lastName: '',
+  phone: '',
   email: '',
   address: '',
   city: '',
@@ -485,8 +487,17 @@ async function onSubmit() {
 
 onMounted(async () => {
   if (props.job) {
+    console.log('props.job: ', props.job);
     form.title = props.job.title;
     form.description = props.job.description;
+    form.firstName = props.job.firstName;
+    form.lastName = props.job.lastName;
+    form.phone = props.job.phone;
+    form.email = props.job.email;
+    form.address = props.job.address;
+    form.city = props.job.city;
+    form.state = props.job.state;
+    form.zip = props.job.zip;
   }
 });
 </script>
