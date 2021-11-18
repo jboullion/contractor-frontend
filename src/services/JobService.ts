@@ -7,6 +7,11 @@ export interface IJobService {
   getMyJobs(query?: string): Promise<IJob[]>;
 
   /**
+   * Get Siingle ID
+   */
+  getJob(uuid: string): Promise<IJob>;
+
+  /**
    * Retrieves all jobs for current user
    */
   createJob(data: IJobCreate): Promise<IJob>;
@@ -23,6 +28,11 @@ export default class JobService implements IJobService {
 
   async getMyJobs(query?: string): Promise<IJob[]> {
     const res = await this._axios.get(`/jobs?${query}`, this.setHeaders());
+    return res.data;
+  }
+
+  async getJob(uuid: string): Promise<IJob> {
+    const res = await this._axios.get(`/jobs/${uuid}`, this.setHeaders());
     return res.data;
   }
 

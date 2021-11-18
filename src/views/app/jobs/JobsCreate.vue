@@ -19,9 +19,9 @@
               <StringInput
                 :name="'job-name'"
                 :label="'Job Name'"
-                v-model.trim="form.jobName"
+                v-model.trim="form.title"
                 :type="'text'"
-                :error="form.errors.jobName"
+                :error="form.errors.title"
                 maxlength="100"
                 required
               />
@@ -432,7 +432,7 @@ const loading = ref(false);
 const formValid = ref(true);
 
 const form = reactive({
-  jobName: '',
+  title: '',
   description: '',
   firstName: '',
   lastName: '',
@@ -443,7 +443,7 @@ const form = reactive({
   zip: '',
   country: 'us',
   errors: {
-    jobName: '',
+    title: '',
     description: '',
     firstName: '',
     lastName: '',
@@ -457,8 +457,8 @@ const form = reactive({
 });
 
 async function onSubmit() {
-  if (!form.jobName) {
-    form.errors.jobName = 'Job Name is Required';
+  if (!form.title) {
+    form.errors.title = 'Job Name is Required';
     formValid.value = false;
   }
 
@@ -484,7 +484,7 @@ async function onSubmit() {
     loading.value = true;
 
     const jobCreate: IJobCreate = {
-      title: form.jobName,
+      title: form.title,
       description: form.description,
     };
 

@@ -39,15 +39,13 @@
 <script setup lang="ts">
 import AuthService from '../../services/AuthService';
 import { AxiosError } from 'axios';
-import { computed, inject, onMounted, reactive, ref } from 'vue';
+import { inject, ref } from 'vue';
 import { IAuthCredentials, IAuthForm, ISignInResponse } from '../../types/Auth';
 import AuthError from '../../components/auth/AuthError.vue';
 
 import { useRouter } from 'vue-router';
 import AuthForm from '../../components/auth/AuthForm.vue';
 import AuthSocialLogin from '../../components/auth/AuthSocialLogin.vue';
-
-//import Bugsnag from '@bugsnag/js';
 
 const $router = useRouter();
 

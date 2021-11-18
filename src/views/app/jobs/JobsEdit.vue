@@ -1,126 +1,128 @@
 <template>
   <div class="bg-white shadow overflow-hidden sm:rounded-lg">
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      <form
-        class="space-y-8 divide-y divide-gray-200"
-        @submit.prevent="onSubmit"
-      >
-        <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-          <div class="space-y-6 sm:space-y-5">
-            <div>
-              <h3 class="text-lg leading-6 font-medium text-gray-900">
-                Edit Job Information
-              </h3>
-              <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                Basic Job Information
-              </p>
-            </div>
+      <div v-if="loading">Loading...</div>
+      <div v-else-if="job">
+        <form
+          @submit.prevent="onSubmit"
+          class="space-y-8 divide-y divide-gray-200"
+        >
+          <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
             <div class="space-y-6 sm:space-y-5">
-              <StringInput
-                :name="'job-name'"
-                :label="'Job Name'"
-                v-model.trim="form.jobName"
-                :type="'text'"
-                :error="form.errors.jobName"
-                maxlength="100"
-                required
-              />
+              <div>
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  Edit Job Information
+                </h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                  Basic Job Information
+                </p>
+              </div>
+              <div class="space-y-6 sm:space-y-5">
+                <StringInput
+                  :name="'job-name'"
+                  :label="'Job Name'"
+                  v-model.trim="form.title"
+                  :type="'text'"
+                  :error="form.errors.title"
+                  maxlength="100"
+                  required
+                />
 
-              <StringInput
-                :name="'description'"
-                :label="'Description'"
-                v-model.trim="form.description"
-                :type="'text'"
-                :error="form.errors.description"
-                maxlength="255"
-              />
+                <StringInput
+                  :name="'description'"
+                  :label="'Description'"
+                  v-model.trim="form.description"
+                  :type="'text'"
+                  :error="form.errors.description"
+                  maxlength="255"
+                />
 
-              <StringInput
-                :name="'first-name'"
-                :label="'Contact First Name'"
-                v-model.trim="form.firstName"
-                :type="'text'"
-                :error="form.errors.firstName"
-                autocomplete="given-name"
-                maxlength="50"
-              />
+                <StringInput
+                  :name="'first-name'"
+                  :label="'Contact First Name'"
+                  v-model.trim="form.firstName"
+                  :type="'text'"
+                  :error="form.errors.firstName"
+                  autocomplete="given-name"
+                  maxlength="50"
+                />
 
-              <StringInput
-                :name="'last-name'"
-                :label="'Contact Last Name'"
-                v-model.trim="form.lastName"
-                :type="'text'"
-                :error="form.errors.lastName"
-                autocomplete="family-name"
-                maxlength="50"
-              />
+                <StringInput
+                  :name="'last-name'"
+                  :label="'Contact Last Name'"
+                  v-model.trim="form.lastName"
+                  :type="'text'"
+                  :error="form.errors.lastName"
+                  autocomplete="family-name"
+                  maxlength="50"
+                />
 
-              <StringInput
-                :name="'email'"
-                :label="'Email'"
-                v-model.trim="form.email"
-                :type="'email'"
-                :error="form.errors.email"
-                autocomplete="email"
-                maxlength="100"
-              />
+                <StringInput
+                  :name="'email'"
+                  :label="'Email'"
+                  v-model.trim="form.email"
+                  :type="'email'"
+                  :error="form.errors.email"
+                  autocomplete="email"
+                  maxlength="100"
+                />
 
-              <StringInput
-                :name="'street-address'"
-                :label="'Address'"
-                v-model.trim="form.address"
-                :type="'text'"
-                :error="form.errors.address"
-                autocomplete="street-address"
-                maxlength="200"
-              />
+                <StringInput
+                  :name="'street-address'"
+                  :label="'Address'"
+                  v-model.trim="form.address"
+                  :type="'text'"
+                  :error="form.errors.address"
+                  autocomplete="street-address"
+                  maxlength="200"
+                />
 
-              <StringInput
-                :name="'city'"
-                :label="'City'"
-                v-model.trim="form.city"
-                :type="'text'"
-                :error="form.errors.city"
-                autocomplete="address-level2"
-                maxlength="100"
-              />
+                <StringInput
+                  :name="'city'"
+                  :label="'City'"
+                  v-model.trim="form.city"
+                  :type="'text'"
+                  :error="form.errors.city"
+                  autocomplete="address-level2"
+                  maxlength="100"
+                />
 
-              <StringInput
-                :name="'state'"
-                :label="'State'"
-                v-model.trim="form.state"
-                :type="'text'"
-                :error="form.errors.state"
-                autocomplete="address-level1"
-                maxlength="100"
-              />
+                <StringInput
+                  :name="'state'"
+                  :label="'State'"
+                  v-model.trim="form.state"
+                  :type="'text'"
+                  :error="form.errors.state"
+                  autocomplete="address-level1"
+                  maxlength="100"
+                />
 
-              <StringInput
-                :name="'zip'"
-                :label="'ZIP / Postal code'"
-                v-model.trim="form.zip"
-                :type="'text'"
-                :error="form.errors.zip"
-                autocomplete="postal-code"
-                maxlength="100"
-              />
+                <StringInput
+                  :name="'zip'"
+                  :label="'ZIP / Postal code'"
+                  v-model.trim="form.zip"
+                  :type="'text'"
+                  :error="form.errors.zip"
+                  autocomplete="postal-code"
+                  maxlength="100"
+                />
 
-              <DropdownSelect
-                :name="'country'"
-                :label="'Country'"
-                v-model.trim="form.country"
-                :options="[
-                  { label: 'United States', value: 'us' },
-                  { label: 'Canada', value: 'ca' },
-                  { label: 'Mexico', value: 'mex' },
-                ]"
-                :error="form.errors.country"
-                autocomplete="country-name"
-              />
+                <DropdownSelect
+                  :name="'country'"
+                  :label="'Country'"
+                  v-model.trim="form.country"
+                  :options="[
+                    { label: 'United States', value: 'us' },
+                    { label: 'Canada', value: 'ca' },
+                    { label: 'Mexico', value: 'mex' },
+                  ]"
+                  :error="form.errors.country"
+                  autocomplete="country-name"
+                />
+              </div>
             </div>
-          </div>
 
-          <!-- <div
+            <!-- <div
               class="
                 divide-y divide-gray-200
                 pt-8
@@ -361,58 +363,60 @@
                 </div>
               </div>
             </div> -->
-        </div>
-
-        <div class="pt-5">
-          <div class="flex justify-end">
-            <button
-              type="button"
-              class="
-                bg-white
-                py-2
-                px-4
-                border border-gray-300
-                rounded-md
-                shadow-sm
-                text-sm
-                font-medium
-                text-gray-700
-                hover:bg-gray-50
-                focus:outline-none
-                focus:ring-2
-                focus:ring-offset-2
-                focus:ring-indigo-500
-              "
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="
-                ml-3
-                inline-flex
-                justify-center
-                py-2
-                px-4
-                border border-transparent
-                shadow-sm
-                text-sm
-                font-medium
-                rounded-md
-                text-white
-                bg-indigo-600
-                hover:bg-indigo-700
-                focus:outline-none
-                focus:ring-2
-                focus:ring-offset-2
-                focus:ring-indigo-500
-              "
-            >
-              Save
-            </button>
           </div>
-        </div>
-      </form>
+
+          <div class="pt-5">
+            <div class="flex justify-end">
+              <button
+                type="button"
+                class="
+                  bg-white
+                  py-2
+                  px-4
+                  border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  text-sm
+                  font-medium
+                  text-gray-700
+                  hover:bg-gray-50
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-offset-2
+                  focus:ring-indigo-500
+                "
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="
+                  ml-3
+                  inline-flex
+                  justify-center
+                  py-2
+                  px-4
+                  border border-transparent
+                  shadow-sm
+                  text-sm
+                  font-medium
+                  rounded-md
+                  text-white
+                  bg-indigo-600
+                  hover:bg-indigo-700
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-offset-2
+                  focus:ring-indigo-500
+                "
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div v-else>Job not found!</div>
     </div>
   </div>
 </template>
@@ -420,19 +424,23 @@
 <script setup lang="ts">
 import StringInput from '@/components/ui/StringInput.vue';
 import { AxiosError } from 'axios';
-import { inject, reactive, ref } from 'vue';
+import { inject, reactive, ref, onMounted } from 'vue';
 import JobService from '../../../services/JobService';
 import { IJob, IJobCreate } from '../../../types/Job';
 import DropdownSelect from '@/components/ui/DropdownSelect.vue';
+import { useRoute } from 'vue-router';
+
+const $route = useRoute();
 
 const _jobService: JobService = inject('jobService') as JobService;
 
+const jobId: string = $route.params.id as string;
 const job = ref<IJob>();
-const loading = ref(false);
+const loading = ref(true);
 const formValid = ref(true);
 
 const form = reactive({
-  jobName: '',
+  title: '',
   description: '',
   firstName: '',
   lastName: '',
@@ -443,7 +451,7 @@ const form = reactive({
   zip: '',
   country: 'us',
   errors: {
-    jobName: '',
+    title: '',
     description: '',
     firstName: '',
     lastName: '',
@@ -457,8 +465,8 @@ const form = reactive({
 });
 
 async function onSubmit() {
-  if (!form.jobName) {
-    form.errors.jobName = 'Job Name is Required';
+  if (!form.title) {
+    form.errors.title = 'Job Name is Required';
     formValid.value = false;
   }
 
@@ -483,23 +491,32 @@ async function onSubmit() {
   try {
     loading.value = true;
 
-    const jobCreate: IJobCreate = {
-      title: form.jobName,
-      description: form.description,
-    };
+    // const jobCreate: IJobCreate = {
+    //   title: form.title,
+    //   description: form.description,
+    // };
 
-    job.value = await _jobService.createJob(jobCreate);
+    // job.value = await _jobService.createJob(jobCreate);
   } catch (error: AxiosError | any) {
     if (error.response) {
       // Access to config, request, and response
+      // TODO: Display error
       console.log(error.response);
     } else {
+      // TODO: Bugsnag
       console.log(error);
     }
   } finally {
     loading.value = false;
   }
 }
+
+onMounted(async () => {
+  job.value = await _jobService.getJob(jobId);
+  form.title = job.value.title;
+  form.description = job.value.description;
+  loading.value = false;
+});
 </script>
 
 <style lang="scss"></style>
