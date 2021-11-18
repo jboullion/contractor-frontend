@@ -12,7 +12,6 @@ export interface NavChildItem {
 export interface NavigationItem {
   name: string;
   icon: RenderFunction;
-  current: boolean;
   to?: string;
   children?: NavChildItem[];
 }

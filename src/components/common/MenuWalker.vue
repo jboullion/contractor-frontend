@@ -3,12 +3,17 @@
     <div v-if="!item.children">
       <router-link
         :to="item.to"
-        :class="[
-          item.current
-            ? 'bg-gray-100 text-gray-900'
-            : 'bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-          'group w-full flex items-center pl-2 py-2 text-sm font-medium rounded-md',
-        ]"
+        class="
+          group
+          w-full
+          flex
+          items-center
+          pl-2
+          py-2
+          text-sm
+          font-medium
+          rounded-md
+        "
       >
         <component
           :is="item.icon"
@@ -98,4 +103,12 @@ const props = defineProps({
 });
 </script>
 
-<style></style>
+<style scoped>
+.group {
+  @apply bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900;
+}
+
+.group.router-link-active {
+  @apply bg-gray-100 text-gray-900;
+}
+</style>

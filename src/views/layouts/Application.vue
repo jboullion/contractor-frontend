@@ -71,11 +71,10 @@ const $store = useStore();
 const _authService: AuthService = inject('authService') as AuthService;
 
 const navigation: NavigationItem[] = [
-  { name: 'Dashboard', icon: HomeIcon, to: '/', current: true },
+  { name: 'Dashboard', icon: HomeIcon, to: '/dashboard' },
   {
     name: 'Jobs',
     icon: ClipboardIcon,
-    current: false,
     children: [
       { name: 'List', to: '/jobs' },
       { name: 'Create', to: '/jobs/create' },
