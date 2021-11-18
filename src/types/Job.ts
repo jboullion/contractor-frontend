@@ -1,4 +1,4 @@
-import { User } from './Auth';
+import { IUser } from './Auth';
 
 export enum JobStatus {
   OPEN = 'OPEN',
@@ -12,9 +12,22 @@ export interface IJob {
   title: string;
   description: string;
   status: JobStatus;
-  user: User;
+  user: IUser;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface IJobForm {
+  title: string;
+  description: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
 }
 
 export interface IJobResponse {
@@ -24,7 +37,7 @@ export interface IJobResponse {
   error?: string;
 }
 
-export interface IJobCreate {
+export interface IJobSubmit {
   title: string;
   description?: string;
 }

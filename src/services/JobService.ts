@@ -1,4 +1,4 @@
-import { IJob, IJobCreate } from '../types/Job';
+import { IJob, IJobSubmit } from '../types/Job';
 import store from '../store';
 export interface IJobService {
   /**
@@ -12,9 +12,14 @@ export interface IJobService {
   getJob(uuid: string): Promise<IJob>;
 
   /**
-   * Retrieves all jobs for current user
+   * Create a job
    */
-  createJob(data: IJobCreate): Promise<IJob>;
+  createJob(data: IJobSubmit): Promise<IJob>;
+
+  /**
+   * Update a job
+   */
+  updateJob(data: IJobSubmit): Promise<IJob>;
 }
 
 export default class JobService implements IJobService {
@@ -36,8 +41,13 @@ export default class JobService implements IJobService {
     return res.data;
   }
 
-  async createJob(data: IJobCreate): Promise<IJob> {
+  async createJob(data: IJobSubmit): Promise<IJob> {
     const res = await this._axios.post(`/jobs`, data, this.setHeaders());
+    return res.data;
+  }
+
+  async updateJob(data: IJobSubmit): Promise<IJob> {
+    const res = await this._axios.patch(`/jobs`, data, this.setHeaders());
     return res.data;
   }
 }
