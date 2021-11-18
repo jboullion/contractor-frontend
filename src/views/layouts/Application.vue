@@ -65,7 +65,7 @@ import { throttle, parseJwt } from '../../utils';
 import { NavigationItem } from '../../types/UI';
 import TopMenu from '../../components/common/TopMenu.vue';
 
-// const $router = useRouter();
+const $router = useRouter();
 const $store = useStore();
 
 const _authService: AuthService = inject('authService') as AuthService;
@@ -101,6 +101,9 @@ function checkAuth() {
     document.removeEventListener('click', tHandler);
     document.removeEventListener('visibilitychange', focusListener);
     sessionExpired.value = true;
+    setInterval(() => {
+      _authService.signout();
+    }, 10 * 1000);
   }
 }
 

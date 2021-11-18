@@ -2,7 +2,7 @@ import {
   IAuthCredentials,
   IAuthRefreshCredentials,
   ISignInResponse,
-  User,
+  IUser,
 } from '../types/Auth';
 import store from '../store';
 import router from '../router';
@@ -18,12 +18,12 @@ export interface IAuthService {
   /**
    * Create an account
    */
-  signup(credentials: IAuthCredentials): Promise<User>;
+  signup(credentials: IAuthCredentials): Promise<IUser>;
 
   /**
    * Refresh our authentication
    */
-  refresh(credentials: IAuthRefreshCredentials): Promise<User>;
+  refresh(credentials: IAuthRefreshCredentials): Promise<IUser>;
 
   /**
    * Log a user out
@@ -46,7 +46,7 @@ export default class AuthService implements IAuthService {
     return res.data;
   }
 
-  async signup(credentials: IAuthCredentials): Promise<User> {
+  async signup(credentials: IAuthCredentials): Promise<IUser> {
     const { email, password } = credentials;
 
     const res = await this._axios.post(`${BASE_URL}/signup`, {
@@ -56,7 +56,7 @@ export default class AuthService implements IAuthService {
     return res.data;
   }
 
-  async refresh(credentials: IAuthRefreshCredentials): Promise<User> {
+  async refresh(credentials: IAuthRefreshCredentials): Promise<IUser> {
     const { email, refreshToken } = credentials;
 
     const res = await this._axios.post(`${BASE_URL}/refresh`, {
@@ -74,7 +74,7 @@ export default class AuthService implements IAuthService {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('accessExpires');
-    router.push({ path: '/' });
+    router.push({ path: '/login' });
   }
 
   private updateAccess(tokens: ISignInResponse) {
