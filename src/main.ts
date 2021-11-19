@@ -17,7 +17,10 @@ import './index.css'; // Tailwind
 const swIntervalMS = 60 * 60 * 1000;
 
 const $axios = axios.create({
-  baseURL: 'http://localhost:3001',
+  baseURL:
+    import.meta.env.VITE_STAGE === 'prod'
+      ? 'https://diy-backend.herokuapp.com'
+      : 'http://localhost:3001',
   headers: {
     'Content-type': 'application/json',
   },
