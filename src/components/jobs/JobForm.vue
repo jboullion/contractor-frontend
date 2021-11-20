@@ -48,6 +48,16 @@
           />
 
           <StringInput
+            :name="'phone'"
+            :label="'Phone'"
+            v-model.trim="form.phone"
+            :type="'text'"
+            :error="errors.phone"
+            autocomplete="tel"
+            maxlength="50"
+          />
+
+          <StringInput
             :name="'email'"
             :label="'Email'"
             v-model.trim="form.email"

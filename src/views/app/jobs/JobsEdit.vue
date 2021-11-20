@@ -17,12 +17,15 @@
 
 <script setup lang="ts">
 import { AxiosError } from 'axios';
-import { inject, reactive, ref, onMounted } from 'vue';
+import { inject, ref, onMounted } from 'vue';
 import JobService from '../../../services/JobService';
 import { IJob, IJobSubmit, IJobForm } from '../../../types/Job';
-import { useRoute } from 'vue-router';
 import JobForm from '../../../components/jobs/JobForm.vue';
+import { useRoute } from 'vue-router';
 
+import { useRouter } from 'vue-router';
+
+const $router = useRouter();
 const $route = useRoute();
 
 const _jobService: JobService = inject('jobService') as JobService;
@@ -46,9 +49,16 @@ async function updateJob(form: IJobForm) {
       city: form.city,
       state: form.state,
       zip: form.zip,
+      country: form.country,
     };
 
-    job.value = await _jobService.updateJob(jobUpdate);
+    job.value = await _jobService.updateJob(jobId, jobUpdate);
+
+    if (job.value.uuid) {
+      $router.push({ path: '/jobs/' + job.value.uuid });
+    } else {
+      //Bugsnag.notify(new Error('No access token returned'));
+    }
   } catch (error: AxiosError | any) {
     if (error.response) {
       // Access to config, request, and response

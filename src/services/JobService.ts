@@ -19,7 +19,7 @@ export interface IJobService {
   /**
    * Update a job
    */
-  updateJob(data: IJobSubmit): Promise<IJob>;
+  updateJob(uuid: string, data: IJobSubmit): Promise<IJob>;
 }
 
 export default class JobService implements IJobService {
@@ -46,8 +46,12 @@ export default class JobService implements IJobService {
     return res.data;
   }
 
-  async updateJob(data: IJobSubmit): Promise<IJob> {
-    const res = await this._axios.patch(`/jobs`, data, this.setHeaders());
+  async updateJob(uuid: string, data: IJobSubmit): Promise<IJob> {
+    const res = await this._axios.patch(
+      `/jobs/${uuid}`,
+      data,
+      this.setHeaders(),
+    );
     return res.data;
   }
 }
