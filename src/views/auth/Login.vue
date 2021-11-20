@@ -3,20 +3,19 @@
     class="min-h-full flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8"
   >
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <img
-        class="mx-auto h-12 w-auto"
-        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-        alt="Workflow"
-      />
+      <img class="mx-auto h-12 w-auto" src="@/assets/logo.svg" alt="Workflow" />
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
         Sign in to your account
       </h2>
       <p class="mt-2 text-center text-sm text-gray-600">
         Or
         {{ ' ' }}
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+        <router-link
+          to="/register"
+          class="font-medium text-green-600 hover:text-green-500"
+        >
           start your 14-day free trial
-        </a>
+        </router-link>
       </p>
     </div>
 
@@ -28,7 +27,7 @@
           :heading="errorHeading"
           :errors="errors"
         />
-        <AuthForm @onSubmit="onSubmit" />
+        <AuthForm @submitSuccess="onSubmit" login />
 
         <AuthSocialLogin />
       </div>
@@ -52,23 +51,10 @@ const $router = useRouter();
 const _authService: AuthService = inject('authService') as AuthService;
 
 const loading = ref(false);
-const formValid = ref(true);
 const errorHeading = ref('');
 const errors = ref<String[]>([]);
 
 async function onSubmit(form: IAuthForm) {
-  if (!form.email) {
-    form.errors.email = 'Email is Required';
-    formValid.value = false;
-  }
-
-  if (!form.password) {
-    form.errors.password = 'Password is Required';
-    formValid.value = false;
-  }
-
-  if (!formValid.value) return;
-
   try {
     loading.value = true;
 

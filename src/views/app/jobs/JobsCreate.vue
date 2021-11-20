@@ -16,6 +16,9 @@ import { inject, reactive, ref } from 'vue';
 import JobService from '../../../services/JobService';
 import { IJob, IJobForm, IJobSubmit } from '../../../types/Job';
 import JobForm from '../../../components/jobs/JobForm.vue';
+import { useRouter } from 'vue-router';
+
+const $router = useRouter();
 
 const _jobService: JobService = inject('jobService') as JobService;
 
@@ -40,6 +43,12 @@ async function createJob(form: IJobForm) {
     };
 
     job.value = await _jobService.createJob(jobCreate);
+
+    if (job.value.uuid) {
+      $router.push({ path: '/jobs/' + job.value.uuid });
+    } else {
+      //Bugsnag.notify(new Error('No access token returned'));
+    }
   } catch (error: AxiosError | any) {
     if (error.response) {
       // Access to config, request, and response

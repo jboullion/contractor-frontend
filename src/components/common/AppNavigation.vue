@@ -11,11 +11,8 @@
     "
   >
     <div class="flex items-center flex-shrink-0 px-4">
-      <img
-        class="h-8 w-auto"
-        src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-        alt="Workflow"
-      />
+      <img class="h-8 w-auto" src="@/assets/logo.svg" alt="DIY Checklist" />
+      <span class="text-lg font-medium ml-2">DIY Checklist</span>
     </div>
     <div class="mt-5 flex-grow flex flex-col">
       <nav class="flex-1 px-2 space-y-1 bg-white" aria-label="Sidebar">
@@ -26,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, PropType } from 'vue';
+import { PropType } from 'vue';
 import { NavigationItem } from '../../types/UI';
 import MenuWalker from './MenuWalker.vue';
 

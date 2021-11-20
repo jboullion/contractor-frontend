@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, defineProps } from 'vue';
+import { PropType } from 'vue';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { NavigationItem } from '../../types/UI';
 

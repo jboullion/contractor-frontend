@@ -80,8 +80,8 @@
                   xl:text-6xl
                 "
               >
-                <span class="block text-gray-900">Data to enrich your</span>
-                <span class="block text-indigo-600">online business</span>
+                <span class="block text-gray-900">Manage your DIY</span>
+                <span class="block text-yellow-500">projects</span>
               </span>
             </h1>
             <p

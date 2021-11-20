@@ -1,26 +1,23 @@
 <template>
-  <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div
+    class="min-h-full flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8"
+  >
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <img
-        class="mx-auto h-12 w-auto"
-        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-        alt="Workflow"
-      />
+      <img class="mx-auto h-12 w-auto" src="@/assets/logo.svg" alt="Workflow" />
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Create your account today!
+        Create your account!
       </h2>
-      <p class="mt-2 text-center text-sm text-gray-600">
-        Or
-        {{ ' ' }}
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-          start your 14-day free trial
-        </a>
-      </p>
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-        <AuthForm @onSubmit="onSubmit" />
+        <AuthError
+          v-if="errorHeading"
+          class="mb-4"
+          :heading="errorHeading"
+          :errors="errors"
+        />
+        <AuthForm @submitSuccess="onSubmit" />
 
         <AuthSocialLogin />
       </div>
@@ -33,30 +30,21 @@ import AuthService from '../../services/AuthService';
 import { AxiosError } from 'axios';
 import { inject, ref } from 'vue';
 import { IAuthCredentials, IAuthForm, IUser } from '../../types/Auth';
+import AuthError from '../../components/auth/AuthError.vue';
+
+import { useRouter } from 'vue-router';
 import AuthForm from '../../components/auth/AuthForm.vue';
 import AuthSocialLogin from '../../components/auth/AuthSocialLogin.vue';
-//import Bugsnag from '@bugsnag/js';
+
+const $router = useRouter();
 
 const _authService: AuthService = inject('authService') as AuthService;
 
 const loading = ref(false);
-const formValid = ref(true);
 const errorHeading = ref('');
 const errors = ref<String[]>([]);
 
 async function onSubmit(form: IAuthForm) {
-  if (!form.email) {
-    form.errors.email = 'Email is Required';
-    formValid.value = false;
-  }
-
-  if (!form.password) {
-    form.errors.password = 'Password is Required';
-    formValid.value = false;
-  }
-
-  if (!formValid.value) return;
-
   try {
     loading.value = true;
 
@@ -68,14 +56,19 @@ async function onSubmit(form: IAuthForm) {
     const res: IUser = await _authService.signup(credentials);
 
     if (res.id) {
-      // TODO: user created, router redirect to login page?
-      // TODO: auth
+      // TODO: Should we automatically login a user when they register?
+      $router.push({ path: '/login' });
+    } else {
+      //Bugsnag.notify(new Error('No access token returned'));
     }
   } catch (error: AxiosError | any) {
-    errorHeading.value = 'Unable to login';
+    errorHeading.value = 'Unable to register';
     if (error.response) {
-      if (error.response.data?.message?.length) {
+      if (error.response.data?.statusCode === 400) {
         errors.value = error.response.data.message;
+      } else if (error.response.data?.statusCode === 401) {
+        errorHeading.value = error.response.data.message;
+        errors.value = [];
       }
     } else {
       //Bugsnag.notify(new Error(error));

@@ -55,6 +55,7 @@
             :error="errors.email"
             autocomplete="email"
             maxlength="100"
+            required
           />
 
           <StringInput
@@ -408,10 +409,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch, PropType, onMounted } from 'vue';
-import StringInput from '@/components/ui/StringInput.vue';
-import DropdownSelect from '@/components/ui/DropdownSelect.vue';
+import { ref, reactive, PropType, onMounted } from 'vue';
+import StringInput from '../ui/StringInput.vue';
+import DropdownSelect from '../ui/DropdownSelect.vue';
 import { IJob, IJobForm } from '../../types/Job';
+import { EMAIL_REGEX } from '../../utils/validation';
 
 const emit = defineEmits(['submitSuccess']);
 const formValid = ref(true);
@@ -470,9 +472,15 @@ async function onSubmit() {
   // if (!form.lastName) {
   //   errors.lastName = 'Last Name is required';
   // }
-  // if (!form.email) {
-  //   errors.email = 'Email is required';
-  // }
+
+  if (!form.email) {
+    errors.email = 'Email is Required';
+    formValid.value = false;
+  } else if (!EMAIL_REGEX.test(form.email)) {
+    errors.email = 'Email must be a valid email format';
+    formValid.value = false;
+  }
+
   // if (!form.address) {
   //   errors.address = 'Address is required';
   // }
@@ -487,7 +495,6 @@ async function onSubmit() {
 
 onMounted(async () => {
   if (props.job) {
-    console.log('props.job: ', props.job);
     form.title = props.job.title;
     form.description = props.job.description;
     form.firstName = props.job.firstName;

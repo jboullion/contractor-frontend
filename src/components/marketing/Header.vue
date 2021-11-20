@@ -17,11 +17,7 @@
         <div class="flex items-center justify-between w-full md:w-auto">
           <a href="#">
             <span class="sr-only">Workflow</span>
-            <img
-              class="h-8 w-auto sm:h-10"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-              alt=""
-            />
+            <img class="h-8 w-auto sm:h-10" src="@/assets/logo.svg" alt="" />
           </a>
           <div class="-mr-2 flex items-center md:hidden">
             <PopoverButton
@@ -75,9 +71,9 @@
               text-base
               font-medium
               rounded-md
-              text-indigo-600
-              bg-white
-              hover:bg-gray-50
+              bg-yellow-500
+              text-white
+              hover:bg-yellow-400
             "
           >
             Log in
