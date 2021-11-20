@@ -83,7 +83,7 @@
                   >
                     <router-link
                       :to="'/jobs/' + job.uuid + '/edit'"
-                      class="text-indigo-600 hover:text-indigo-900"
+                      class="text-yellow-600 hover:text-yellow-900"
                       >Edit</router-link
                     >
                   </td>

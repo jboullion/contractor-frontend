@@ -19,7 +19,7 @@
             <span class="sr-only">Workflow</span>
             <img
               class="h-12 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+              src="https://tailwindui.com/img/logos/workflow-mark.svg?color=yellow&shade=600"
               alt=""
             />
           </a>
@@ -30,7 +30,7 @@
               class="
                 text-sm
                 font-semibold
-                text-indigo-600
+                text-yellow-600
                 uppercase
                 tracking-wide
               "
@@ -58,8 +58,8 @@
                 class="
                   text-base
                   font-medium
-                  text-indigo-600
-                  hover:text-indigo-500
+                  text-yellow-600
+                  hover:text-yellow-500
                 "
                 >Go back home<span aria-hidden="true"> &rarr;</span></a
               >

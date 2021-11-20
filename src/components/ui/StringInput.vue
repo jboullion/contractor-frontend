@@ -34,7 +34,7 @@
           "
           :class="{
             'border-red-300 focus:ring-red-500 focus:border-red-500': error,
-            'focus:ring-indigo-500 focus:border-indigo-500': !error,
+            'focus:ring-yellow-500 focus:border-yellow-500': !error,
           }"
         />
         <div

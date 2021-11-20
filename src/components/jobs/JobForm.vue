@@ -168,10 +168,10 @@
                                 name="comments"
                                 type="checkbox"
                                 class="
-                                  focus:ring-indigo-500
+                                  focus:ring-yellow-500
                                   h-4
                                   w-4
-                                  text-indigo-600
+                                  text-yellow-600
                                   border-gray-300
                                   rounded
                                 "
@@ -197,10 +197,10 @@
                                   name="candidates"
                                   type="checkbox"
                                   class="
-                                    focus:ring-indigo-500
+                                    focus:ring-yellow-500
                                     h-4
                                     w-4
-                                    text-indigo-600
+                                    text-yellow-600
                                     border-gray-300
                                     rounded
                                   "
@@ -227,10 +227,10 @@
                                   name="offers"
                                   type="checkbox"
                                   class="
-                                    focus:ring-indigo-500
+                                    focus:ring-yellow-500
                                     h-4
                                     w-4
-                                    text-indigo-600
+                                    text-yellow-600
                                     border-gray-300
                                     rounded
                                   "
@@ -284,10 +284,10 @@
                                 name="push-notifications"
                                 type="radio"
                                 class="
-                                  focus:ring-indigo-500
+                                  focus:ring-yellow-500
                                   h-4
                                   w-4
-                                  text-indigo-600
+                                  text-yellow-600
                                   border-gray-300
                                 "
                               />
@@ -310,10 +310,10 @@
                                 name="push-notifications"
                                 type="radio"
                                 class="
-                                  focus:ring-indigo-500
+                                  focus:ring-yellow-500
                                   h-4
                                   w-4
-                                  text-indigo-600
+                                  text-yellow-600
                                   border-gray-300
                                 "
                               />
@@ -336,10 +336,10 @@
                                 name="push-notifications"
                                 type="radio"
                                 class="
-                                  focus:ring-indigo-500
+                                  focus:ring-yellow-500
                                   h-4
                                   w-4
-                                  text-indigo-600
+                                  text-yellow-600
                                   border-gray-300
                                 "
                               />
@@ -384,7 +384,7 @@
             focus:outline-none
             focus:ring-2
             focus:ring-offset-2
-            focus:ring-indigo-500
+            focus:ring-yellow-500
           "
         >
           Cancel
@@ -403,12 +403,12 @@
             font-medium
             rounded-md
             text-white
-            bg-indigo-600
-            hover:bg-indigo-700
+            bg-yellow-600
+            hover:bg-yellow-700
             focus:outline-none
             focus:ring-2
             focus:ring-offset-2
-            focus:ring-indigo-500
+            focus:ring-yellow-500
           "
         >
           Save
