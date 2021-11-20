@@ -42,7 +42,7 @@
               top-0
               py-1.5
               px-4
-              bg-indigo-500
+              bg-yellow-500
               rounded-full
               text-xs
               font-semibold
@@ -67,7 +67,7 @@
           <ul role="list" class="mt-6 space-y-6">
             <li v-for="feature in tier.features" :key="feature" class="flex">
               <CheckIcon
-                class="flex-shrink-0 w-6 h-6 text-indigo-500"
+                class="flex-shrink-0 w-6 h-6 text-yellow-500"
                 aria-hidden="true"
               />
               <span class="ml-3 text-gray-500">{{ feature }}</span>
@@ -79,8 +79,8 @@
           href="#"
           :class="[
             tier.mostPopular
-              ? 'bg-indigo-500 text-white hover:bg-indigo-600'
-              : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100',
+              ? 'bg-yellow-500 text-white hover:bg-yellow-600'
+              : 'bg-yellow-50 text-yellow-700 hover:bg-yellow-100',
             'mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium',
           ]"
           >{{ tier.cta }}</a

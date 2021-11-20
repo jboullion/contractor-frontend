@@ -121,7 +121,7 @@
                     rounded-md
                     placeholder-gray-500
                     shadow-sm
-                    focus:ring-indigo-500 focus:border-indigo-500
+                    focus:ring-yellow-500 focus:border-yellow-500
                     sm:flex-1
                     border-gray-300
                   "
@@ -145,7 +145,7 @@
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-yellow-500
                     sm:mt-0
                     sm:ml-3
                     sm:flex-shrink-0
@@ -244,13 +244,13 @@
                   focus:outline-none
                   focus:ring-2
                   focus:ring-offset-2
-                  focus:ring-indigo-500
+                  focus:ring-yellow-500
                 "
               >
                 <span class="sr-only">Watch our video to learn more</span>
                 <img
                   class="w-full"
-                  src="https://images.unsplash.com/photo-1556740758-90de374c12ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                  src="https://st.depositphotos.com/1001033/3458/i/600/depositphotos_34589765-stock-photo-diy-tools-concept.jpg"
                   alt=""
                 />
                 <div
@@ -266,7 +266,7 @@
                   aria-hidden="true"
                 >
                   <svg
-                    class="h-20 w-20 text-indigo-500"
+                    class="h-20 w-20 text-yellow-500"
                     fill="currentColor"
                     viewBox="0 0 84 84"
                   >

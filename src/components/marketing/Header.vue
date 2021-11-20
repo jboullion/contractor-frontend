@@ -33,7 +33,7 @@
                 focus:outline-none
                 focus:ring-2
                 focus:ring-inset
-                focus:ring-indigo-500
+                focus:ring-yellow-500
               "
             >
               <span class="sr-only">Open main menu</span>
@@ -117,7 +117,7 @@
             <div>
               <img
                 class="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                src="https://tailwindui.com/img/logos/workflow-mark-yellow-600.svg"
                 alt=""
               />
             </div>
@@ -135,7 +135,7 @@
                   focus:outline-none
                   focus:ring-2
                   focus:ring-inset
-                  focus:ring-indigo-500
+                  focus:ring-yellow-500
                 "
               >
                 <span class="sr-only">Close main menu</span>
@@ -170,7 +170,7 @@
               py-3
               text-center
               font-medium
-              text-indigo-600
+              text-yellow-600
               bg-gray-50
               hover:bg-gray-100
             "
