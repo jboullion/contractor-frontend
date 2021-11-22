@@ -69,11 +69,14 @@
             </div>
           </TransitionChild>
           <div class="flex-shrink-0 flex items-center px-4">
-            <img
-              class="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-logo-yellow-600-mark-gray-800-text.svg"
-              alt="Workflow"
-            />
+            <router-link to="/">
+              <img
+                class="h-8 w-auto"
+                src="@/assets/logo.svg"
+                alt="DIY Checklist"
+              />
+            </router-link>
+            <div class="text-lg font-medium ml-2">DIY Checklist</div>
           </div>
           <div class="mt-5 flex-1 h-0 overflow-y-auto">
             <nav class="px-2 space-y-1">

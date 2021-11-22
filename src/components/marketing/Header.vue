@@ -15,10 +15,15 @@
     >
       <div class="flex items-center flex-1">
         <div class="flex items-center justify-between w-full md:w-auto">
-          <a href="#">
-            <span class="sr-only">Workflow</span>
-            <img class="h-8 w-auto sm:h-10" src="@/assets/logo.svg" alt="" />
-          </a>
+          <router-link to="/">
+            <!-- <span class="sr-only">DIY Checklist</span> -->
+            <img
+              class="h-8 w-auto sm:h-10"
+              src="@/assets/logo.svg"
+              alt="DIY Checklist"
+            />
+          </router-link>
+          <div class="text-lg font-medium ml-2">DIY Checklist</div>
           <div class="-mr-2 flex items-center md:hidden">
             <PopoverButton
               class="

@@ -15,3 +15,10 @@ export interface NavigationItem {
   to?: string;
   children?: NavChildItem[];
 }
+
+export interface ITabNav {
+  name: string;
+  target: string;
+  //current: boolean;
+  //component: string;
+}

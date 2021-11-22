@@ -21,7 +21,7 @@
                 py-2
                 text-base
                 border-gray-300
-                focus:outline-none focus:ring-purple-500 focus:border-purple-500
+                focus:outline-none focus:ring-yellow-500 focus:border-yellow-500
                 sm:text-sm
                 rounded-md
               "
@@ -44,7 +44,7 @@
                   :href="tab.href"
                   :class="[
                     tab.current
-                      ? 'border-purple-500 text-purple-600'
+                      ? 'border-yellow-500 text-yellow-600'
                       : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
                     'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm',
                   ]"
@@ -86,12 +86,12 @@
                           bg-white
                           rounded-md
                           font-medium
-                          text-purple-600
-                          hover:text-purple-500
+                          text-yellow-600
+                          hover:text-yellow-500
                           focus:outline-none
                           focus:ring-2
                           focus:ring-offset-2
-                          focus:ring-purple-500
+                          focus:ring-yellow-500
                         "
                       >
                         Update
@@ -125,12 +125,12 @@
                           bg-white
                           rounded-md
                           font-medium
-                          text-purple-600
-                          hover:text-purple-500
+                          text-yellow-600
+                          hover:text-yellow-500
                           focus:outline-none
                           focus:ring-2
                           focus:ring-offset-2
-                          focus:ring-purple-500
+                          focus:ring-yellow-500
                         "
                       >
                         Update
@@ -142,12 +142,12 @@
                           bg-white
                           rounded-md
                           font-medium
-                          text-purple-600
-                          hover:text-purple-500
+                          text-yellow-600
+                          hover:text-yellow-500
                           focus:outline-none
                           focus:ring-2
                           focus:ring-offset-2
-                          focus:ring-purple-500
+                          focus:ring-yellow-500
                         "
                       >
                         Remove
@@ -175,12 +175,12 @@
                           bg-white
                           rounded-md
                           font-medium
-                          text-purple-600
-                          hover:text-purple-500
+                          text-yellow-600
+                          hover:text-yellow-500
                           focus:outline-none
                           focus:ring-2
                           focus:ring-offset-2
-                          focus:ring-purple-500
+                          focus:ring-yellow-500
                         "
                       >
                         Update
@@ -216,12 +216,12 @@
                           bg-white
                           rounded-md
                           font-medium
-                          text-purple-600
-                          hover:text-purple-500
+                          text-yellow-600
+                          hover:text-yellow-500
                           focus:outline-none
                           focus:ring-2
                           focus:ring-offset-2
-                          focus:ring-purple-500
+                          focus:ring-yellow-500
                         "
                       >
                         Update
@@ -262,12 +262,12 @@
                           bg-white
                           rounded-md
                           font-medium
-                          text-purple-600
-                          hover:text-purple-500
+                          text-yellow-600
+                          hover:text-yellow-500
                           focus:outline-none
                           focus:ring-2
                           focus:ring-offset-2
-                          focus:ring-purple-500
+                          focus:ring-yellow-500
                         "
                       >
                         Update
@@ -295,12 +295,12 @@
                           bg-white
                           rounded-md
                           font-medium
-                          text-purple-600
-                          hover:text-purple-500
+                          text-yellow-600
+                          hover:text-yellow-500
                           focus:outline-none
                           focus:ring-2
                           focus:ring-offset-2
-                          focus:ring-purple-500
+                          focus:ring-yellow-500
                         "
                       >
                         Update
@@ -312,12 +312,12 @@
                           bg-white
                           rounded-md
                           font-medium
-                          text-purple-600
-                          hover:text-purple-500
+                          text-yellow-600
+                          hover:text-yellow-500
                           focus:outline-none
                           focus:ring-2
                           focus:ring-offset-2
-                          focus:ring-purple-500
+                          focus:ring-yellow-500
                         "
                       >
                         Remove
@@ -348,9 +348,9 @@
                       v-model="automaticTimezoneEnabled"
                       :class="[
                         automaticTimezoneEnabled
-                          ? 'bg-purple-600'
+                          ? 'bg-yellow-600'
                           : 'bg-gray-200',
-                        'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-auto',
+                        'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 sm:ml-auto',
                       ]"
                     >
                       <span
@@ -396,9 +396,9 @@
                       v-model="autoUpdateApplicantDataEnabled"
                       :class="[
                         autoUpdateApplicantDataEnabled
-                          ? 'bg-purple-600'
+                          ? 'bg-yellow-600'
                           : 'bg-gray-200',
-                        'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-auto',
+                        'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 sm:ml-auto',
                       ]"
                     >
                       <span
