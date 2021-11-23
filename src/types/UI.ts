@@ -19,6 +19,4 @@ export interface NavigationItem {
 export interface ITabNav {
   name: string;
   target: string;
-  //current: boolean;
-  //component: string;
 }

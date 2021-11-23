@@ -154,7 +154,10 @@
           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black
         "
       >
-        {{ login ? 'Sign In' : 'Create Account' }}
+        <span v-if="loading">
+          <SpinnerIcon />
+        </span>
+        <span v-else>{{ login ? 'Sign In' : 'Create Account' }}</span>
       </button>
     </div>
   </form>
@@ -164,9 +167,14 @@
 import { reactive, ref } from 'vue';
 import { ExclamationCircleIcon } from '@heroicons/vue/solid';
 import { EMAIL_REGEX } from '../../utils/validation';
+import SpinnerIcon from '../icons/SpinnerIcon.vue';
 
 const props = defineProps({
   login: {
+    type: Boolean,
+    default: false,
+  },
+  loading: {
     type: Boolean,
     default: false,
   },

@@ -27,7 +27,7 @@
           :heading="errorHeading"
           :errors="errors"
         />
-        <AuthForm @submitSuccess="onSubmit" login />
+        <AuthForm @submitSuccess="onSubmit" :loading="loading" login />
 
         <AuthSocialLogin />
       </div>

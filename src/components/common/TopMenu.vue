@@ -42,23 +42,42 @@
       </form>
     </div>
     <div class="ml-4 flex items-center md:ml-6">
-      <button
-        type="button"
-        class="
-          bg-white
-          p-1
-          rounded-full
-          text-gray-400
-          hover:text-gray-500
-          focus:outline-none
-          focus:ring-2
-          focus:ring-offset-2
-          focus:ring-yellow-500
-        "
-      >
-        <span class="sr-only">View notifications</span>
-        <BellIcon class="h-6 w-6" aria-hidden="true" />
-      </button>
+      <span class="relative">
+        <button
+          type="button"
+          class="
+            bg-white
+            p-1
+            rounded-full
+            text-gray-400
+            hover:text-gray-500
+            focus:outline-none
+            focus:ring-2
+            focus:ring-offset-2
+            focus:ring-yellow-500
+          "
+        >
+          <span class="sr-only">View notifications</span>
+          <BellIcon class="h-6 w-6" aria-hidden="true" />
+          <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
+            <span
+              class="
+                animate-ping
+                absolute
+                inline-flex
+                h-full
+                w-full
+                rounded-full
+                bg-purple-400
+                opacity-75
+              "
+            ></span>
+            <span
+              class="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"
+            ></span>
+          </span>
+        </button>
+      </span>
 
       <!-- Profile dropdown -->
       <Menu as="div" class="ml-3 relative">
