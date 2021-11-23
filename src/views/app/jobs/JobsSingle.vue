@@ -14,12 +14,13 @@
               @switchTab="switchTab"
             />
 
-            <JobInfo v-show="activeTab === 'job-info'" />
-            <JobMaterials v-show="activeTab === 'job-materials'" />
-            <JobChecklist v-show="activeTab === 'job-checklist'" />
-            <JobCosts v-show="activeTab === 'job-costs'" />
-            <JobTime v-show="activeTab === 'job-time'" />
-            <JobTeam v-show="activeTab === 'job-team'" />
+            <!-- TODO: Should we convert to a dynamic component? <component :is=""> -->
+            <JobInfo v-show="activeTab === 'job-info'" :job="job" />
+            <JobMaterials v-show="activeTab === 'job-materials'" :job="job" />
+            <JobChecklist v-show="activeTab === 'job-checklist'" :job="job" />
+            <JobCosts v-show="activeTab === 'job-costs'" :job="job" />
+            <JobTime v-show="activeTab === 'job-time'" :job="job" />
+            <JobTeam v-show="activeTab === 'job-team'" :job="job" />
           </div>
         </div>
       </div>
@@ -60,53 +61,6 @@ const _jobService: JobService = inject('jobService') as JobService;
 const loading = ref(true);
 const jobId: string = $route.params.id as string;
 const job = ref<IJob>();
-
-const jobInfo = [
-  {
-    key: 'title',
-    title: 'Title',
-  },
-  {
-    key: 'description',
-    title: 'Description',
-  },
-  {
-    key: 'firstName',
-    title: 'Contact First Name',
-  },
-  {
-    key: 'lastName',
-    title: 'Contact Last Name',
-  },
-  {
-    key: 'phone',
-    title: 'Phone',
-  },
-  {
-    key: 'email',
-    title: 'Email',
-  },
-  {
-    key: 'address',
-    title: 'Address',
-  },
-  {
-    key: 'city',
-    title: 'City',
-  },
-  {
-    key: 'state',
-    title: 'State',
-  },
-  {
-    key: 'zip',
-    title: 'Zip',
-  },
-  {
-    key: 'country',
-    title: 'Country',
-  },
-];
 
 onMounted(async () => {
   job.value = await _jobService.getJob(jobId);
